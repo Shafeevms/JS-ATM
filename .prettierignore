@@ -1,0 +1,7 @@
+.vscode
+node_modules
+babel.config.js
+.editorconfig
+.gitignore
+jest.config.js
+package-lock.json
