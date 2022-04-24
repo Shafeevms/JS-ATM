@@ -1,0 +1,53 @@
+@import './_mixins.scss';
+@import '../public/fonts/stylesheet.css';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  color: #182233;
+}
+
+main {
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.container {
+  margin: 0 auto;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.btn {
+  padding: 14px 24px;
+  border-radius: 7px;
+  background-color: $blue;
+  border: 2px solid $blue;
+  color: #fff;
+  transition: background-color .3s ease-in-out, border .3s ease-in-out, color .3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $blue-hover;
+    border: 2px solid $blue-hover;
+  }
+}

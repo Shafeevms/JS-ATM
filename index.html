@@ -7,6 +7,24 @@
   <title>Document</title>
 </head>
 <body>
-
+  <header class="header container">
+    <h1 class="header__title">Coin.</h1>
+    <div class="header__wrapper">
+      <button class="header__btn">Банкоматы</button>
+      <button class="header__btn">Счета</button>
+      <button class="header__btn">Валюта</button>
+      <button class="header__btn">Выйти</button>
+    </div>
+  </header>
+  <main>
+    <div class="login">
+      <form action="POST" class="login__form">
+        <h2 class="login__title">Вход в аккаунт</h2>
+        <input type="text" class="login__input" id="login" placeholder="Введите логин">
+        <input type="password" class="login__input" id="password" placeholder="Введите пароль">
+        <button type="submit" class="login__btn btn">Войти</button>
+      </form>
+    </div>
+  </main>
 </body>
 </html>

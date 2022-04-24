@@ -1,0 +1,45 @@
+@import './common.scss';
+
+.header {
+  padding-top: 25px;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: $blue;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+
+
+  &__title {
+    font-size: 48px;
+    font-weight: 300;
+    color: #fff;
+  }
+
+  &__wrapper {}
+
+  &__btn {
+    padding: 14px 24px;
+    border-radius: 7px;
+    background-color: #fff;
+    border: 2px solid #fff;
+    color: $blue;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out, border .3s ease-in-out, color .3s ease-in-out;
+
+    &:not(:last-child) {
+      margin-right: 25px;
+    }
+
+    &_pressed {
+      color: #fff;
+      background-color: $blue-pressed;
+      border: 2px solid $blue-pressed;
+    }
+
+    &:hover {
+      background-color: $blue-hover;
+      border: 2px solid $blue-hover;
+    }
+  }
+}
