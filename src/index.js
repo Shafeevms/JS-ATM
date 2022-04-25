@@ -1,20 +1,11 @@
 import './styles/header.scss';
 import './styles/login.scss';
-import { formDataToObject } from './js/helpers';
+import listener from './js/listeners';
 
 const form = document.querySelector('.login__form');
-const formData = new FormData(form);
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formObjectData = formDataToObject(formData);
-  // console.log(formObjectData);
-  const resp = await fetch('http://localhost:3000/login', {
-    method: 'POST',
-    // body: JSON.stringify(formObjectData),
-    body: formData,
-  });
+form.addEventListener('submit', listener.checkLogin(form));
 
-  const result = await resp.json();
-  console.log(result);
+window.addEventListener('popstate', () => {
+  console.log(window.location.pathname);
 });
