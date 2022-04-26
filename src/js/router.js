@@ -1,5 +1,22 @@
-// window.history.pushState(null, '', 'test') - меняем url
-// window.location.pathname - читаем url
+const changeURLEvent = () => {
+  const pushState = history.pushState;
+  const replaceState = history.replaceState;
 
-// хороший пример
-//  https://codesandbox.io/s/59tyx?file=/js/router.js
+  history.pushState = function () {
+    pushState.apply(history, arguments);
+    window.dispatchEvent(new Event('pushstate'));
+    window.dispatchEvent(new Event('locationchange'));
+  };
+
+  history.replaceState = function () {
+    replaceState.apply(history, arguments);
+    window.dispatchEvent(new Event('replacestate'));
+    window.dispatchEvent(new Event('locationchange'));
+  };
+
+  window.addEventListener('popstate', function () {
+    window.dispatchEvent(new Event('locationchange'))
+  });
+};
+
+export default changeURLEvent;
