@@ -5,4 +5,6 @@ export const formDataToObject = (formData) => Array
     return acc;
   }, {});
 
-export const ff = () => {};
+export const renderComponent = (element, component) => {
+  element.appendChild(component);
+};

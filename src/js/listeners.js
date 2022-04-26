@@ -16,6 +16,7 @@ const listener = {
       });
       const result = await resp.json();
       console.log(result);
+      console.log('необходимо обработать все варианты ответов');
     };
   },
 };

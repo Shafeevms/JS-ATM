@@ -1,4 +1,4 @@
-export const login = () => {
+export const loginComponent = () => {
   const div = document.createElement('div');
   div.classList.add('login');
   div.innerHTML = `
