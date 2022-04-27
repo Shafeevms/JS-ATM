@@ -22,7 +22,13 @@
     font-weight: 700;
     text-align: center;
   }
-
+  &__alert {
+    position: absolute;
+    left: 86px;
+    bottom: 110px;
+    color: red;
+    font-size: 12px;
+  }
   &__input {
     position: relative;
     width: 100%;
@@ -49,4 +55,12 @@
     border: 2px solid $blue;
     background-color: $blue;
   }
+}
+
+.valid {
+  border-color: green;
+}
+
+.invalid {
+  border-color: red;
 }

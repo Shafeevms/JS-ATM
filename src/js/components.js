@@ -4,6 +4,7 @@ export const loginComponent = () => {
   div.innerHTML = `
   <form class="login__form">
     <h2 class="login__title">Вход в аккаунт</h2>
+    <h3 class="visually-hidden login__alert">введите корректный логин и пароль</h3>
     <input type="text" name="login" class="login__input" id="login" placeholder="Введите логин" value="developer">
     <input type="password" name="password" class="login__input" id="password" placeholder="Введите пароль" value="skillbox">
     <button type="submit" class="login__btn btn">Войти</button>
