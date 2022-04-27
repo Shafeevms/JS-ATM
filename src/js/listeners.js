@@ -1,5 +1,6 @@
 import { BASE_URL } from './store';
 import { formDataToObject } from './helpers';
+import { isLoginValid } from './validation';
 
 const listener = {
   // eslint-disable-next-line arrow-body-style
@@ -7,6 +8,7 @@ const listener = {
     return async (e) => {
       e.preventDefault();
       const formData = formDataToObject(new FormData(form));
+      console.log(isLoginValid(formData));
       const resp = await fetch(`${BASE_URL}login`, {
         method: 'POST',
         headers: {
