@@ -1,4 +1,4 @@
-import loginPage from './login';
+import { loginPage } from './login';
 
 export const createURLChangeEvent = () => {
   const pushState = history.pushState;
@@ -26,11 +26,10 @@ export const routeSwitcher = () => {
   switch (path) {
     case '/':
       sessionStorage.getItem('token')
-        ? console.log('main page')
+        ? root.innerHTML = 'MAIN PAGE'
         : redirect('login');
       break;
     case '/login':
-      console.log('login page');
       loginPage();
       break;
 
@@ -39,4 +38,4 @@ export const routeSwitcher = () => {
   }
 };
 
-const redirect = (path) => window.history.pushState(null, '', path);
+export const redirect = (path) => window.history.pushState(null, '', path);

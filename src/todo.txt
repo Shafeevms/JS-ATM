@@ -1,14 +1,5 @@
 
-ниже варианты ответа при отправке логина и пароля
-// {payload: null, error: 'No such user'}
-
-// {error: ""
-// payload:
-// token: "ZGV2ZWxvcGVyOnNraWxsYm94"}
-
-// {payload: null, error: 'Invalid route'}
-
-посмотреть проверку наличия токена и сделать для этого функцию
+зациклился на ошибке в loginComponent - разобраться
 
 
 сразу сделать тесты для раздела авторизации

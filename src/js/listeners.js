@@ -1,5 +1,6 @@
-import { BASE_URL } from './store';
+import { fetchLogin } from './api';
 import { formDataToObject } from './helpers';
+import { loginResponse } from './login';
 import { isLoginValid, addValidationClasses } from './validation';
 
 const listener = {
@@ -8,19 +9,13 @@ const listener = {
     return async (e) => {
       e.preventDefault();
       const formData = formDataToObject(new FormData(form));
-      const areInputsValid = isLoginValid(formData);
-      addValidationClasses(areInputsValid, form);
-
-      const resp = await fetch(`${BASE_URL}login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-        body: JSON.stringify(formData),
-      });
-      const result = await resp.json();
-      console.log(result);
-      console.log('необходимо обработать все варианты ответов');
+      const areInputsCorrect = isLoginValid(formData);
+      addValidationClasses(areInputsCorrect, form);
+      if (!areInputsCorrect.includes(false)) {
+        const response = await fetchLogin(formData);
+        //! не до конца понимаю нужно перед этой функцией писать await
+        loginResponse(response);
+      }
     };
   },
 };
