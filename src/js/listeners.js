@@ -1,6 +1,6 @@
 import { fetchLogin } from './api';
 import { formDataToObject } from './helpers';
-import { loginResponse } from './login';
+import { loginResponse } from './login'; //! какая-то зацикленность
 import { isLoginValid, addValidationClasses } from './validation';
 
 const listener = {
@@ -13,7 +13,7 @@ const listener = {
       addValidationClasses(areInputsCorrect, form);
       if (!areInputsCorrect.includes(false)) {
         const response = await fetchLogin(formData);
-        //! не до конца понимаю нужно перед этой функцией писать await
+        //! не до конца понимаю нужно перед этой функцией (ниже) писать await
         loginResponse(response);
       }
     };

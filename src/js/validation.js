@@ -15,6 +15,7 @@ export const addValidationClasses = (arr, form) => {
     } else {
       input[index].classList.add('invalid');
       loginAlert.classList.remove('visually-hidden');
+      loginAlert.innerText = 'введите корректный логин и пароль';
     }
   });
 };

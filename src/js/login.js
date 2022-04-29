@@ -5,9 +5,9 @@ import { redirect } from './router';
 
 const root = document.querySelector('#root');
 
-export const loginPage = (err) => {
+export const loginPage = (error) => {
   root.innerHTML = '';
-  renderComponent(root, loginComponent(err));
+  renderComponent(root, loginComponent(error));
   const form = document.querySelector('.login__form');
   form.addEventListener('submit', listener.checkLogin(form));
 };
@@ -17,9 +17,5 @@ export const loginResponse = (obj) => {
   if (payload) {
     sessionStorage.setItem('token', payload.token);
     redirect('/');
-  }
-  root.innerHTML = '';
-  renderComponent(root, loginComponent(error));
-  const form = document.querySelector('.login__form');
-  form.addEventListener('submit', listener.checkLogin(form));
+  } else loginPage(error);
 };

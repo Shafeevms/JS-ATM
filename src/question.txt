@@ -5,3 +5,4 @@
 form.removeEventListener('submit', listener.checkLogin(form)) - не удаляется слушатель
 router.js ни к чему не подключал, но он иницииализировался
 не до конца понимаю почему router.js работает а прямые методы pushtate и слушатель popstate - нет
+createURLChangeEvent - не понимаю как это работает)))
