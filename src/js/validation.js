@@ -1,7 +1,7 @@
 export const isLoginValid = (obj) => {
   return Object
   .values(obj)
-  .map(value => value.length >= 6 && !/\s/.test(value))
+  .map(value => value.length >= 6 && !/\s/.test(value));
 };
 
 export const addValidationClasses = (arr, form) => {
@@ -15,7 +15,7 @@ export const addValidationClasses = (arr, form) => {
     } else {
       input[index].classList.add('invalid');
       loginAlert.classList.remove('visually-hidden');
-      loginAlert.innerText = 'введите корректный логин и пароль';
+      loginAlert.innerText = 'Введите корректный логин и пароль';
     }
   });
 };

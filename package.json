@@ -5,11 +5,13 @@
     "lint:report": "eslint ./",
     "build": "webpack --config webpack.prod.js",
     "start": "webpack serve --open --config webpack.dev.js",
-    "pret": "npx prettier --write ."
+    "pret": "npx prettier --write .",
+    "test": "jest"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.12",
-    "@babel/preset-env": "^7.16.11",
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "babel-jest": "^28.0.3",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.1",
     "css-loader": "^6.5.1",
@@ -18,8 +20,10 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-formatter-gitlab": "^2.1.0",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^26.1.5",
     "html-webpack-partials-plugin": "^0.8.0",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^28.0.3",
     "mini-css-extract-plugin": "^2.5.3",
     "prettier": "2.5.1",
     "sass": "^1.49.7",

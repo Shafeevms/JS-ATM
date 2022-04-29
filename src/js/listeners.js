@@ -13,7 +13,7 @@ const listener = {
       addValidationClasses(areInputsCorrect, form);
       if (!areInputsCorrect.includes(false)) {
         const response = await fetchLogin(formData);
-        //! не до конца понимаю нужно перед этой функцией (ниже) писать await
+        //! не до конца понимаю нужно перед этой функцией (ниже) писать await или нет?
         loginResponse(response);
       }
     };
