@@ -9,7 +9,7 @@ export const loginPage = (error) => {
   root.innerHTML = '';
   renderComponent(root, loginComponent(error));
   const form = document.querySelector('.login__form');
-  form.addEventListener('submit', listener.checkLogin(form));
+  form.addEventListener('submit', listener.checkLogin);
 };
 
 export const loginResponse = (obj) => {
