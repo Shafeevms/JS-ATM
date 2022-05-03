@@ -1,7 +1,7 @@
-import { loginComponent } from './components';
-import { renderComponent } from './helpers';
-import listener from './listeners';
-import { redirect } from './router';
+import { loginComponent } from '../components';
+import { renderComponent } from '../helpers';
+import listener from '../listeners';
+import { redirect } from '../router';
 
 const root = document.querySelector('#root');
 
@@ -16,6 +16,6 @@ export const loginResponse = (obj) => {
   const { payload, error } = obj;
   if (payload) {
     sessionStorage.setItem('token', payload.token);
-    redirect('/');
+    redirect('accounts');
   } else loginPage(error);
 };

@@ -1,3 +1,5 @@
+import { redirect } from "./router";
+
 export const formDataToObject = (formData) => Array
   .from(formData.entries())
   .reduce((acc, pair) => {
@@ -8,3 +10,5 @@ export const formDataToObject = (formData) => Array
 export const renderComponent = (element, component) => {
   element.appendChild(component);
 };
+
+export const checkToken = () => sessionStorage.getItem('token');

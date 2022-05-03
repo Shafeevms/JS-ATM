@@ -1,4 +1,9 @@
-import { loginPage } from './login';
+/* eslint-disable no-unused-expressions */
+import { loginPage } from './pages/login';
+import { checkToken } from './helpers';
+import { accountsPage } from './pages/accounts';
+import { ATMPage } from './pages/atm';
+import { currencyPage } from './pages/currency';
 
 export const createURLChangeEvent = () => {
   const pushState = history.pushState;
@@ -25,12 +30,27 @@ export const routeSwitcher = () => {
   const path = window.location.pathname;
   switch (path) {
     case '/':
-      sessionStorage.getItem('token')
-        ? root.innerHTML = 'MAIN PAGE'
+      checkToken()
+        ? redirect('accounts')
         : redirect('login');
       break;
     case '/login':
       loginPage();
+      break;
+    case '/accounts':
+      checkToken()
+        ? accountsPage()
+        : redirect('login');
+      break;
+    case '/atm':
+      checkToken()
+        ? ATMPage()
+        : redirect('login');
+      break;
+    case '/currency':
+      checkToken()
+        ? currencyPage()
+        : redirect('login');
       break;
 
     default:
