@@ -22,3 +22,40 @@ export const headerButtonsComponent = (pressBtn) => {
     <a href="login" class="header__btn">Выйти</a>`;
   return div;
 };
+
+export const accountsPageComponent = () => {
+  const div = document.createElement('div');
+  div.className = 'accounts container';
+  div.innerHTML = `
+    <header class="accounts__header">
+      <h2 class="accounts__title">Ваши счета</h2>
+      <select name="sort" class="accounts__select">
+        <option name="" id="">Сортировка</option>
+        <option name="" id="">По номеру</option>
+        <option name="" id="">По балансу</option>
+        <option name="" id="">По последней транзакции</option>
+      </select>
+      <button class="accounts__btn btn">+ Создать новый счет</button>
+    </header>
+    <ul class="accounts__cardlist">
+    </ul>`;
+    return div;
+};
+
+export const accountCardComponent = (obj) => {
+  const { account, balance, transactions } = obj;
+  const li = document.createElement('li');
+  li.className = 'accounts__card card'
+  li.innerHTML = `
+    <h3 class="card__account">${account}</h3>
+    <span class="card__account-sum">${balance}</span>
+    <h4 class="card__title_last">Последняя транзакция:</h4>
+    <span class="card__date">${transactions[transactions.length - 1].date}</span>
+    <button class="card__btn btn">Открыть</button>`;
+  const btn = li.querySelector('.card__btn');
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('Нажатие на кнопку в карточке');
+  });
+  return li;
+};

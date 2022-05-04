@@ -1,5 +1,6 @@
 import './styles/header.scss';
 import './styles/login.scss';
+import './styles/accounts.scss';
 import { createURLChangeEvent, routeSwitcher } from './js/router';
 
 createURLChangeEvent();

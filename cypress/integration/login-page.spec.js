@@ -71,6 +71,6 @@ describe('enter login and change directory to main page', () => {
     cy.get('@login').type('developer');
     cy.get('@password').type('skillbox');
     cy.get('button').click();
-    cy.url().should('eq', 'http://localhost:8080/');
+    cy.url().should('eq', 'http://localhost:8080/accounts');
   })
 })

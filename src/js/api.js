@@ -11,4 +11,11 @@ export const fetchLogin = async (data) => {
   return resp.json();
 };
 
-export const gd = () => {};
+export const getAccounts = async() => {
+  const resp = await fetch(`${BASE_URL}accounts`, {
+    headers: {
+      Authorization: `Basic ${sessionStorage.getItem('token')}`,
+    },
+  });
+  return resp.json();
+};
