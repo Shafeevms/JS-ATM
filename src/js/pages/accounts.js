@@ -9,8 +9,12 @@ import { userAccount } from '../store';
 
 const header = document.querySelector('.header');
 
-export const accountsPage = async() => {
+export const accountsPage = async () => {
   renderComponent(header, headerButtonsComponent('accounts'));
+  await renderCards();
+};
+
+export const renderCards = async () => {
   root.innerHTML = '';
   const data = await getAccounts();
   userAccount.data = data.payload;
@@ -18,5 +22,5 @@ export const accountsPage = async() => {
   console.log('userAccount: ', userAccount);
   renderComponent(root, accountsPageComponent());
   const ul = document.querySelector('.accounts__cardlist');
-  userAccount.data.forEach(card => renderComponent(ul, accountCardComponent(card)));
+  userAccount.data.forEach((card) => renderComponent(ul, accountCardComponent(card)));
 };

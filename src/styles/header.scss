@@ -16,7 +16,10 @@
     color: #fff;
   }
 
-  &__wrapper {}
+  &__wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
 
   &__btn {
     padding: 14px 24px;
