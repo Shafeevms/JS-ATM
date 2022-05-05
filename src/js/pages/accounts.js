@@ -7,7 +7,7 @@ import {
 import { getAccounts } from '../api';
 import { userAccount } from '../store';
 
-const header = document.querySelector('.header');
+const header = document.querySelector('.header__container');
 
 export const accountsPage = async () => {
   renderComponent(header, headerButtonsComponent('accounts'));

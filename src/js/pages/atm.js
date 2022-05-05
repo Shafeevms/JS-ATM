@@ -1,7 +1,7 @@
 import { renderComponent } from '../helpers';
 import { headerButtonsComponent } from '../components';
 
-const header = document.querySelector('.header');
+const header = document.querySelector('.header__container');
 
 export const ATMPage = () => {
   renderComponent(header, headerButtonsComponent('atm'));

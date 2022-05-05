@@ -1,12 +1,13 @@
 import { ISODateToText } from './helpers';
 import listener from './listeners';
+import { redirect } from './router';
 
 export const loginComponent = (err) => {
   const div = document.createElement('div');
   div.classList.add('login');
   div.innerHTML = `
   <form class="login__form">
-    <h2 class="login__title">Вход в аккаунт</h2>
+    <h2 class="login__title title">Вход в аккаунт</h2>
     <h3 class="${err ? '' : 'visually-hidden'} login__alert">${err ? err : 'введите корректный логин и пароль'}</h3>
     <input type="text" name="login" class="login__input ${err === 'No such user' ? 'invalid' : 'valid'}" id="login" placeholder="Введите логин">
     <input type="password" name="password" class="login__input ${err === 'Invalid password' ? 'invalid' : 'valid'}" id="password" placeholder="Введите пароль">
@@ -31,7 +32,7 @@ export const accountsPageComponent = () => {
   div.className = 'accounts container';
   div.innerHTML = `
     <header class="accounts__header">
-      <h2 class="accounts__title">Ваши счета</h2>
+      <h2 class="accounts__title title">Ваши счета</h2>
       <select name="sort" class="accounts__select">
         <option value="">Сортировка</option>
         <option value="account">По номеру</option>
@@ -62,6 +63,7 @@ export const accountCardComponent = (obj) => {
   btn.addEventListener('click', (e) => {
     e.preventDefault();
     console.log('Нажатие на кнопку в карточке');
+    // redirect()
   });
   return li;
 };
