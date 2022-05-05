@@ -21,6 +21,9 @@ const listener = {
     await createAccount();
     renderCards();
   },
+  sortAccounts: (e) => {
+    console.log('сортировка счетов, ', e.target.value);
+  }
 };
 
 export default listener;

@@ -1,4 +1,3 @@
-import { createAccount } from './api';
 import { ISODateToText } from './helpers';
 import listener from './listeners';
 
@@ -34,16 +33,17 @@ export const accountsPageComponent = () => {
     <header class="accounts__header">
       <h2 class="accounts__title">Ваши счета</h2>
       <select name="sort" class="accounts__select">
-        <option name="" id="">Сортировка</option>
-        <option name="" id="">По номеру</option>
-        <option name="" id="">По балансу</option>
-        <option name="" id="">По последней транзакции</option>
+        <option value="">Сортировка</option>
+        <option value="account">По номеру</option>
+        <option value="balance">По балансу</option>
+        <option value="date">По последней транзакции</option>
       </select>
       <button class="accounts__btn btn">+ Создать новый счет</button>
     </header>
     <ul class="accounts__cardlist">
     </ul>`;
   div.querySelector('.accounts__btn').addEventListener('click', listener.openNewAccount);
+  div.querySelector('.accounts__select').addEventListener('change', listener.sortAccounts);
   return div;
 };
 
