@@ -23,7 +23,7 @@ const listener = {
   },
   sortAccounts: (e) => {
     console.log('сортировка счетов, ', e.target.value);
-  }
+  },
 };
 
 export default listener;
