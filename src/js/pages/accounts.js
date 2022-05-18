@@ -9,17 +9,19 @@ import { userAccount } from '../store';
 
 const header = document.querySelector('.header__container');
 
-export const accountsPage = async () => {
+export const accountsPage = async (id) => {
   renderComponent(header, headerButtonsComponent('accounts'));
-  await renderCards();
+  if (id) {
+    root.innerHTML = id;
+  } else {
+    await renderCards();
+  }
 };
 
 export const renderCards = async () => {
   root.innerHTML = '';
-  const data = await getAccounts();
-  userAccount.data = data.payload;
-  // userAccount = {...await getAccounts()}; // ! почему так не работает?
-  console.log('userAccount: ', userAccount);
+  const { payload } = await getAccounts();
+  userAccount.data = payload;
   renderComponent(root, accountsPageComponent());
   const ul = document.querySelector('.accounts__cardlist');
   userAccount.data.forEach((card) => renderComponent(ul, accountCardComponent(card)));

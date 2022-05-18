@@ -1,7 +1,15 @@
 import './styles/header.scss';
-import './styles/login.scss';
 import './styles/accounts.scss';
-import { createURLChangeEvent, routeSwitcher } from './js/router';
+import { createURLChangeEvent, routeSwitcher, redirect } from './js/router';
+import { checkToken } from './js/helpers';
+
+setInterval(() => {
+  const { pathname } = window.location;
+
+  if (!checkToken() && pathname !== '/login') {
+    redirect('login');
+  }
+}, 1000);
 
 createURLChangeEvent();
 window.addEventListener('locationchange', routeSwitcher);

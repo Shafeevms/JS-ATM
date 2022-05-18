@@ -1,31 +1,31 @@
 const BASE_URL = 'http://localhost:3000/';
 
-export const fetchLogin = async (data) => {
-  const resp = await fetch(`${BASE_URL}login`, {
-    method: 'POST',
+export const request = async ({ method = 'GET', URL, data }) => {
+  const token = sessionStorage.getItem('token');
+
+  const params = {
+    method,
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
+      Authorization: token ? `Basic ${token}` : null,
     },
-    body: JSON.stringify(data),
-  });
-  return resp.json();
+  };
+
+  if (['POST', 'PUT', 'PATCH'].includes(method) && data) {
+    params.body = JSON.stringify(data);
+  }
+
+  const resp = await fetch(`${BASE_URL}${URL}`, params);
+
+  const json = await resp.json();
+  if (json.error === 'Unauthorized') {
+    sessionStorage.removeItem('token');
+  }
+  return json;
 };
 
-export const getAccounts = async () => {
-  const resp = await fetch(`${BASE_URL}accounts`, {
-    headers: {
-      Authorization: `Basic ${sessionStorage.getItem('token')}`,
-    },
-  });
-  return resp.json();
-};
+export const fetchLogin = async (data) => request({ URL: 'login', method: 'POST', data });
 
-export const createAccount = async () => {
-  const resp = await fetch(`${BASE_URL}create-account`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${sessionStorage.getItem('token')}`,
-    },
-  });
-  console.log(await resp.json());
-};
+export const getAccounts = async () => request({ URL: 'accounts' });
+
+export const createAccount = async () => request({ URL: 'create-account', method: 'POST' });

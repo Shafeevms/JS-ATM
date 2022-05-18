@@ -63,7 +63,7 @@ export const accountCardComponent = (obj) => {
   btn.addEventListener('click', (e) => {
     e.preventDefault();
     console.log('Нажатие на кнопку в карточке');
-    // redirect()
+    redirect(`/accounts?id=${account}`);
   });
   return li;
 };

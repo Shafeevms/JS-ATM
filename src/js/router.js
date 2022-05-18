@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-expressions */
 import { loginPage } from './pages/login';
-import { checkToken } from './helpers';
 import { accountsPage } from './pages/accounts';
 import { ATMPage } from './pages/atm';
 import { currencyPage } from './pages/currency';
+
+export const redirect = (path) => window.history.pushState(null, '', path);
 
 export const createURLChangeEvent = () => {
   const pushState = history.pushState;
@@ -27,35 +28,26 @@ export const createURLChangeEvent = () => {
 };
 
 export const routeSwitcher = () => {
-  const path = window.location.pathname;
-  switch (path) {
+  const { pathname, search } = window.location;
+  const urlParams = new URLSearchParams(search);
+
+  switch (pathname) {
     case '/':
-      checkToken()
-        ? redirect('accounts')
-        : redirect('login');
+      redirect('accounts');
       break;
     case '/login':
       loginPage();
       break;
     case '/accounts':
-      checkToken()
-        ? accountsPage()
-        : redirect('login');
+      accountsPage(urlParams.get('id'));
       break;
     case '/atm':
-      checkToken()
-        ? ATMPage()
-        : redirect('login');
+      ATMPage();
       break;
     case '/currency':
-      checkToken()
-        ? currencyPage()
-        : redirect('login');
+      currencyPage();
       break;
-
     default:
       break;
   }
 };
-
-export const redirect = (path) => window.history.pushState(null, '', path);

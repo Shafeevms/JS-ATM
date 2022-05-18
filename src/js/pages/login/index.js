@@ -1,7 +1,8 @@
-import { loginComponent } from '../components';
-import { renderComponent } from '../helpers';
-import listener from '../listeners';
-import { redirect } from '../router';
+import './login.scss';
+import { loginComponent } from '../../components';
+import { renderComponent } from '../../helpers';
+import listener from '../../listeners';
+import { redirect } from '../../router';
 
 const root = document.querySelector('#root');
 
