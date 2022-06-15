@@ -24,8 +24,4 @@ export const request = async ({ method = 'GET', URL, data }) => {
   return json;
 };
 
-export const fetchLogin = async (data) => request({ URL: 'login', method: 'POST', data });
-
-export const getAccounts = async () => request({ URL: 'accounts' });
-
 export const createAccount = async () => request({ URL: 'create-account', method: 'POST' });

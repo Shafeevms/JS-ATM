@@ -1,1 +1,0 @@
-import { loginResponse } from './index';
