@@ -204,6 +204,18 @@
       margin-right: 119px;
     }
   }
+  &__summ {
+    &::after {
+      margin-left: 3px;
+      content: '\20BD';
+    }
+    &_negative {
+      color: #FD4E5D;
+    }
+    &_positive {
+      color: #76CA66;
+    }
+  }
 }
 
 .btn-icon {
