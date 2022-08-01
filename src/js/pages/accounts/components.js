@@ -25,6 +25,7 @@ export const accountsPageComponent = () => {
 
 export const accountCardComponent = (obj) => {
   const { account, balance, transactions } = obj;
+  console.log(obj);
   const lastDate = transactions[transactions.length - 1]?.date;
   const li = document.createElement('li');
   li.className = 'accounts__card card';

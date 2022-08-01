@@ -1,3 +1,5 @@
+import { headerButtonsComponent } from './components';
+
 export const renderComponent = (element, component) => {
   element.appendChild(component);
 };
@@ -28,4 +30,10 @@ const traslateMonthRu = (num) => {
     'декабря',
   ];
   return months[num];
+};
+
+export const headerButtonsEnable = () => {
+  const header = document.querySelector('.header__container');
+  header.lastElementChild !== document.querySelector('.header__wrapper')
+  && renderComponent(header, headerButtonsComponent('accounts'));
 };
