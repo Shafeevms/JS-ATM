@@ -27,4 +27,7 @@ module.exports = {
       ],
     }),
   ],
+  externals: {
+    choices: 'choices.js',
+  },
 };

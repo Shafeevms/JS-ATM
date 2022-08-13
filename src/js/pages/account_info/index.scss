@@ -49,7 +49,12 @@
 
   &__subtitle {}
 
-  &__amount {}
+  &__amount {
+    &::after {
+      margin-left: 3px;
+      content: '\20BD';
+    }
+  }
 
   &__analytics {}
 }
@@ -69,7 +74,7 @@
 .an {
   display: grid;
   grid-template-columns: 1fr 50%;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: 288px 1fr;
   grid-template-areas:
     "form graphs"
     "history history";
@@ -135,14 +140,32 @@
     border-radius: 7px;
     border: 1px solid #9CA3AF;
     grid-area: input;
+
+    -moz-appearance: textfield;
+    &:hover,
+    &:focus {
+      -moz-appearance: number-input;
+    }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 }
 
 .an_graphs {
+  padding: 25px 50px 20px;
   grid-area: graphs;
   height: 288px;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
+
+  &__title {
+    margin-bottom: 25px;
+    font-size: 20px;
+  }
 }
 
 .an_history {
@@ -162,7 +185,8 @@
 
   &__header {
     padding: 20px 49px;
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(240px, 300px) minmax(240px, 300px) minmax(100px, 160px) 150px 1fr;
     background-color: $blue;
     border-radius: 15px;
     font-size: 20px;
@@ -171,49 +195,63 @@
   }
 
   &__header-item {
-    &:nth-child(1) {
-      margin-right: 43px;
-    }
+    // &:nth-child(1) {
+    //   margin-right: 125px;
+    // }
 
-    &:nth-child(2) {
-      margin-right: 70px;
-    }
+    // &:nth-child(2) {
+    //   margin-right: 137px;
+    // }
 
-    &:nth-child(3) {
-      margin-right: 120px;
-    }
+    // &:nth-child(3) {
+    //   margin-right: 140px;
+    // }
   }
 
   &__body-line {
     padding: 20px 49px;
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(240px, 300px) minmax(240px, 300px) minmax(100px, 160px) 150px 1fr;
     border-bottom: 2px solid rgba(0, 82, 255, 0.1);
   }
 
   &__body-item {
 
-    &:nth-child(1) {
-      margin-right: 117px;
-    }
+    // &:nth-child(1) {
+    //   margin-right: 65px;
+    // }
 
-    &:nth-child(2) {
-      margin-right: 111px;
-    }
+    // &:nth-child(2) {
+    //   margin-right: 65px;
+    // }
 
-    &:nth-child(3) {
-      margin-right: 119px;
-    }
+    // &:nth-child(3) {
+    //   margin-right: 119px;
+    // }
   }
+
   &__summ {
     &::after {
       margin-left: 3px;
       content: '\20BD';
     }
+
     &_negative {
       color: #FD4E5D;
+
+      &::before {
+        margin-right: 3px;
+        content: '-';
+      }
     }
+
     &_positive {
       color: #76CA66;
+
+      &::before {
+        margin-right: 3px;
+        content: '+';
+      }
     }
   }
 }
@@ -224,3 +262,5 @@
 }
 
 .btn-text {}
+
+
