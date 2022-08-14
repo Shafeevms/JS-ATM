@@ -93,9 +93,11 @@ const transactionComponent = (obj, currentAccount) => {
 
 // eslint-disable-next-line arrow-body-style
 const transactionHistoryReducer = (array, currentAccount) => {
+  // JSON.parse(localStorage.getItem('accounts'));
+  localStorage.setItem('1', '1');
   return array
     .slice(-10)
-    .sort((a, b) => {a.date - b.date})
+    .sort((a, b) => { a.date - b.date })
     .reduceRight((acc, line) => {
       acc += transactionComponent(line, currentAccount);
       // eslint-disable-next-line prefer-template

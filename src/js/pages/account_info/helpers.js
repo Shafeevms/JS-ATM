@@ -9,3 +9,11 @@ export const minusAmmountDenied = (el) => {
     }
   });
 };
+
+export const saveAccountToLocalStorage = (account) => {
+  const arr = JSON.parse(localStorage.getItem('accounts'));
+  if (!arr.includes(account)) {
+    arr.push(account);
+    localStorage.setItem('accounts', JSON.stringify(arr))
+  }
+};
