@@ -9,6 +9,7 @@ export const renderAccountInfo = async (id) => {
   const { payload } = await getAccountId(id);
   userAccount.data = payload;
 
+  //? в функции ниже есть асинхронность, нужно ли перед RenderComponent или infoPageComponent ставить await?
   renderComponent(root, infoPageComponent(payload));
 };
 

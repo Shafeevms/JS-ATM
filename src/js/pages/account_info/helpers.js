@@ -4,7 +4,7 @@ export function numberWithSpaces(x) {
 
 export const minusAmmountDenied = (el) => {
   el.addEventListener('keydown', (e) => {
-    if (e.code === 'Minus') {
+    if (e.code === 'Minus' || e.code === 'ArrowDown') {
       e.preventDefault();
     }
   });
@@ -22,6 +22,12 @@ export const saveAccountToLocalStorage = (account) => {
     localStorage.setItem('accounts', JSON.stringify([...[], account]));
   }
 };
+
+export const showError = (el) => {
+  console.log(el)
+  const inputs = el.querySelectorAll('input');
+  console.log(inputs);
+}
 
 //! не испульзуется
 export function clearFormInputs(...args) {

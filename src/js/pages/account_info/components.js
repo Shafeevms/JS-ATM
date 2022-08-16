@@ -1,7 +1,12 @@
 import Choices from 'choices.js';
 import { ISODateToText } from '../../helpers';
 import { redirect } from '../../router';
-import { numberWithSpaces, minusAmmountDenied, saveAccountToLocalStorage } from './helpers';
+import {
+  numberWithSpaces,
+  minusAmmountDenied,
+  saveAccountToLocalStorage,
+  showError,
+} from './helpers';
 import { transferAmmount } from './api';
 
 const infoPageComponent = (data) => {
@@ -57,27 +62,14 @@ const infoPageComponent = (data) => {
   </section>
   </div>`;
 
-  const inputAcc = div.querySelector('.an_form__select');
+  const inputAccount = div.querySelector('.an_form__select');
   const inputSumm = div.querySelector('.an_form__summ');
   const form = div.querySelector('.an_form');
   const btnBack = div.querySelector('.details__btn');
 
   minusAmmountDenied(inputSumm);
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const transferInfo = {
-      from: account,
-      to: inputAcc.value,
-      amount: inputSumm.value,
-    };
-    saveAccountToLocalStorage(inputAcc.value);
-    const res = await transferAmmount(transferInfo);
-    console.log(res);
-    const { payload, error } = res;
-
-    redirect(`accounts?id=${account}`);
-  });
+  formListener(form, account, inputAccount, inputSumm);
 
   btnBack.addEventListener('click', () => redirect('accounts'));
   return div;
@@ -106,6 +98,28 @@ const transactionHistoryReducer = (array, currentAccount) => {
       // eslint-disable-next-line prefer-template
       return '<li>' + acc + '</li>';
     }, '');
+};
+
+const formListener = (el, currentAccount, inputAccount, inputSumm) => {
+  el.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const transferInfo = {
+      from: currentAccount,
+      to: inputAccount.value,
+      amount: inputSumm.value,
+    };
+    saveAccountToLocalStorage(inputAccount.value);
+    console.log(transferInfo, 'transferInfo');
+    const res = await transferAmmount(transferInfo);
+    console.log(res);
+    const { payload, error } = res;
+    if (error) {
+      showError(el);
+      return;
+    }
+
+    redirect(`accounts?id=${currentAccount}`);
+  });
 };
 
 export default infoPageComponent;
