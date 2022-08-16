@@ -11,9 +11,19 @@ export const minusAmmountDenied = (el) => {
 };
 
 export const saveAccountToLocalStorage = (account) => {
-  const arr = JSON.parse(localStorage.getItem('accounts'));
-  if (!arr.includes(account)) {
-    arr.push(account);
-    localStorage.setItem('accounts', JSON.stringify(arr))
+  const storage = localStorage.getItem('accounts');
+  if (storage) {
+    const array = JSON.parse(storage);
+    if (array.find((el) => el === account)) {
+      return;
+    }
+    localStorage.setItem('accounts', JSON.stringify([...array, account]));
+  } else {
+    localStorage.setItem('accounts', JSON.stringify([...[], account]));
   }
 };
+
+//! не испульзуется
+export function clearFormInputs(...args) {
+  args.forEach(el => el.value = '');
+}

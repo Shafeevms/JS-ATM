@@ -1,7 +1,7 @@
 import Choices from 'choices.js';
 import { ISODateToText } from '../../helpers';
 import { redirect } from '../../router';
-import { numberWithSpaces, minusAmmountDenied } from './helpers';
+import { numberWithSpaces, minusAmmountDenied, saveAccountToLocalStorage } from './helpers';
 import { transferAmmount } from './api';
 
 const infoPageComponent = (data) => {
@@ -71,7 +71,12 @@ const infoPageComponent = (data) => {
       to: inputAcc.value,
       amount: inputSumm.value,
     };
-    await transferAmmount(transferInfo);
+    saveAccountToLocalStorage(inputAcc.value);
+    const res = await transferAmmount(transferInfo);
+    console.log(res);
+    const { payload, error } = res;
+
+    redirect(`accounts?id=${account}`);
   });
 
   btnBack.addEventListener('click', () => redirect('accounts'));
@@ -93,8 +98,6 @@ const transactionComponent = (obj, currentAccount) => {
 
 // eslint-disable-next-line arrow-body-style
 const transactionHistoryReducer = (array, currentAccount) => {
-  // JSON.parse(localStorage.getItem('accounts'));
-  localStorage.setItem('1', '1');
   return array
     .slice(-10)
     .sort((a, b) => { a.date - b.date })
