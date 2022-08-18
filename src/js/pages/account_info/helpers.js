@@ -11,6 +11,9 @@ export const minusAmmountDenied = (el) => {
 };
 
 export const saveAccountToLocalStorage = (account) => {
+  if (!account) {
+    return;
+  }
   const storage = localStorage.getItem('accounts');
   if (storage) {
     const array = JSON.parse(storage);
@@ -23,13 +26,25 @@ export const saveAccountToLocalStorage = (account) => {
   }
 };
 
-export const showError = (el) => {
-  console.log(el)
+export const showError = (el, error) => {
   const inputs = el.querySelectorAll('input');
-  console.log(inputs);
-}
+  inputs.forEach((input) => input.classList.add('invalid'));
+  el.querySelector('.an_form__misstake').innerHTML = error;
+};
 
-//! не испульзуется
+export const deleteError = (el) => {
+  el.addEventListener('click', (e) => {
+    if (e.target === el.querySelector('input')) {
+      el.querySelectorAll('input').forEach((input) => input.classList.remove('invalid'));
+      el.querySelector('.an_form__misstake').innerHTML = '';
+    }
+  });
+};
+
 export function clearFormInputs(...args) {
   args.forEach(el => el.value = '');
 }
+
+export const filterStringInArray = (array, value) => (
+  array.filter((el) => el.slice(0, value.length) === value)
+);

@@ -6,11 +6,17 @@ import {
   minusAmmountDenied,
   saveAccountToLocalStorage,
   showError,
+  deleteError,
+  filterStringInArray,
 } from './helpers';
 import { transferAmmount } from './api';
 
 const infoPageComponent = (data) => {
   const { account, balance, transactions } = data;
+  const lastTransaction = transactions.pop();
+  const date = new Date(lastTransaction.date);
+
+  console.log(lastTransaction, date);
   const div = document.createElement('div');
   div.innerHTML = `
   <div class="details container">
@@ -28,10 +34,12 @@ const infoPageComponent = (data) => {
   </header>
   <section class="details__analytics an">
     <form class="an__form an_form">
+      <select class="an_form__autocomlete">
+      </select>
+      <div class="an_form__misstake"></div>
       <legend class="an_form__legend">Новый&nbsp;перевод</legend>
       <label class="an_form__label an_form__label_select" for="transaction">Номер счета получателя</label>
-      <input class="an_form__select" name="transaction" id="transaction">
-      </input>
+      <input class="an_form__select" name="transaction" autocomplete="off">
       <label class="an_form__label an_form__label_input" for="number">Сумма перевода</label>
       <input type="number" name="number" class="an_form__summ">
       <button class="btn btn-fiiled an_form__btn">
@@ -66,8 +74,11 @@ const infoPageComponent = (data) => {
   const inputSumm = div.querySelector('.an_form__summ');
   const form = div.querySelector('.an_form');
   const btnBack = div.querySelector('.details__btn');
+  const select = div.querySelector('.an_form__autocomlete');
 
+  inputAutoComplete(inputAccount, select);
   minusAmmountDenied(inputSumm);
+  deleteError(form);
 
   formListener(form, account, inputAccount, inputSumm);
 
@@ -108,18 +119,37 @@ const formListener = (el, currentAccount, inputAccount, inputSumm) => {
       to: inputAccount.value,
       amount: inputSumm.value,
     };
-    saveAccountToLocalStorage(inputAccount.value);
     console.log(transferInfo, 'transferInfo');
     const res = await transferAmmount(transferInfo);
-    console.log(res);
-    const { payload, error } = res;
+    const { error } = res;
     if (error) {
-      showError(el);
+      showError(el, error);
       return;
     }
+    saveAccountToLocalStorage(inputAccount.value);
 
     redirect(`accounts?id=${currentAccount}`);
   });
 };
+
+const inputAutoComplete = ((input, select) => {
+  let arrayAccounts = [];
+  let options = '';
+  input.addEventListener('input', (e) => {
+    e.preventDefault();
+    if (arrayAccounts.length === 0) {
+      arrayAccounts = [...JSON.parse(localStorage.getItem('accounts'))];
+    }
+    //  complete = [] или ['756', '234', ...]
+    const complete = filterStringInArray(arrayAccounts, input.value);
+    if (complete.length > 0) {
+      options = complete.reduce((el, acc) => {
+        acc += el;
+        return '<option>' + acc + '</option>';
+      }, '');
+    }
+    select.innerHTML = options;
+  });
+});
 
 export default infoPageComponent;

@@ -103,6 +103,10 @@
     font-size: 20px;
   }
 
+  &__misstake {
+    color: red;
+  }
+
   &__label {
     justify-self: end;
     align-self: center;
@@ -264,3 +268,10 @@
 .btn-text {}
 
 
+.valid {
+  border-color: green;
+}
+
+.invalid {
+  border-color: red;
+}
