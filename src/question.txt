@@ -18,3 +18,13 @@ renderAccountsInfo и renderCards перемешаны друг с другом,
 В просмотре счета при отправке на другой счет сделал перезагрузку страницы через redirect, дургого варианта не могу придумать
 
 в бэке не смог исправить генерацию случайного аккаунта
+
+
+const selectHelper = (select, input) => {
+  select.addEventListener('click', (e) => {
+    console.log(e.target === select.querySelector('li'), 'интересно почему false');
+    if (e.target.closest('li')) {
+      input.value = e.target.innerText;
+    }
+  });
+};

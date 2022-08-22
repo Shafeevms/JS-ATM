@@ -34,8 +34,7 @@ const infoPageComponent = (data) => {
   </header>
   <section class="details__analytics an">
     <form class="an__form an_form">
-      <select class="an_form__autocomlete">
-      </select>
+      <ul class="an_form__autocomlete"></ul>
       <div class="an_form__misstake"></div>
       <legend class="an_form__legend">Новый&nbsp;перевод</legend>
       <label class="an_form__label an_form__label_select" for="transaction">Номер счета получателя</label>
@@ -79,7 +78,7 @@ const infoPageComponent = (data) => {
   inputAutoComplete(inputAccount, select);
   minusAmmountDenied(inputSumm);
   deleteError(form);
-
+  selectHelper(select, inputAccount);
   formListener(form, account, inputAccount, inputSumm);
 
   btnBack.addEventListener('click', () => redirect('accounts'));
@@ -140,16 +139,27 @@ const inputAutoComplete = ((input, select) => {
     if (arrayAccounts.length === 0) {
       arrayAccounts = [...JSON.parse(localStorage.getItem('accounts'))];
     }
-    //  complete = [] или ['756', '234', ...]
     const complete = filterStringInArray(arrayAccounts, input.value);
     if (complete.length > 0) {
+      select.classList.add('visible');
       options = complete.reduce((el, acc) => {
         acc += el;
-        return '<option>' + acc + '</option>';
+        return '<li class="an_form__autocomlet-item">' + acc + '</li>';
       }, '');
-    }
-    select.innerHTML = options;
+      select.innerHTML = options;
+    } else select.innerHTML = '';
   });
 });
+
+const selectHelper = (select, input) => {
+  select.addEventListener('click', (e) => {
+    console.log(e.target === select.querySelector('li'), 'интересно почему false');
+    // ниже делал условие как в console.log - не работало;
+    if (e.target.closest('li')) {
+      input.value = e.target.innerText;
+      select.classList.remove('visible');
+    }
+  });
+};
 
 export default infoPageComponent;
