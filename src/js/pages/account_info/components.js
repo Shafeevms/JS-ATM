@@ -8,15 +8,13 @@ import {
   showError,
   deleteError,
   filterStringInArray,
+  dataToChart,
 } from './helpers';
 import { transferAmmount } from './api';
 
 const infoPageComponent = (data) => {
   const { account, balance, transactions } = data;
-  const lastTransaction = transactions.pop();
-  const date = new Date(lastTransaction.date);
 
-  console.log(lastTransaction, date);
   const div = document.createElement('div');
   div.innerHTML = `
   <div class="details container">
@@ -75,6 +73,7 @@ const infoPageComponent = (data) => {
   const btnBack = div.querySelector('.details__btn');
   const select = div.querySelector('.an_form__autocomlete');
 
+  dataToChart(transactions);
   inputAutoComplete(inputAccount, select);
   minusAmmountDenied(inputSumm);
   deleteError(form);
