@@ -1,0 +1,157 @@
+.currency {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: grid;
+  grid-template-columns: minmax(588px, 1fr) minmax(703px, 1fr);
+  grid-template-rows: 36px 411px 273px;
+  gap: 50px 44px;
+  grid-template-areas:
+    "title title"
+    "your real"
+    "exchange real";
+
+  &__title {
+    grid-area: title;
+  }
+
+  &__your-currency {
+    grid-area: your;
+  }
+
+  &__exchange {
+    grid-area: exchange;
+  }
+
+  &__real-time {
+    grid-area: real;
+  }
+}
+
+.your-currency {
+  padding: 50px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+
+  &__title {
+    margin-bottom: 25px;
+  }
+
+  &__list {
+    height: 95%;
+    overflow: auto;
+  }
+
+  &__line {}
+}
+
+.currency-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  &__name {
+    letter-spacing: 0.1em;
+  }
+  &:not(:last-child) {
+    margin-bottom: 25px;
+  }
+
+  &__dots {
+    width: 100%;
+    border-bottom: 1px dotted black;
+  }
+
+  &__num {}
+}
+
+.exchange {
+  padding: 50px 50px 62px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+
+  &__title {
+    margin-bottom: 25px;
+  }
+
+  &__form {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+      "transact transact transact transact btn"
+      "sum sum sum sum btn";
+    gap: 25px;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: baseline;
+    &_fst-line {
+      grid-area: transact;
+      gap: 20px;
+    }
+    &_snd-line {
+      grid-area: sum;
+      gap: 8px;
+    }
+  }
+
+  &__from,
+  &__to {
+    padding: 10px 15px;
+    width: 134px;
+    border-radius: 7px;
+  }
+
+  &__to {
+  }
+
+  &__sum {
+    padding: 10px 15px;
+    border-radius: 7px;
+    width: 100%;
+  }
+
+  &__btn {
+    grid-area: btn;
+  }
+}
+
+.real-time {
+  padding: 50px;
+  background: #E5E5E5;
+  border-radius: 50px;
+
+  &__title {
+    margin-bottom: 25px;
+  }
+
+  &__list {}
+
+  &__line {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__name {
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  &__dots {
+    width: 100%;
+    border-bottom: 1px dotted;
+    border-color: green;
+  }
+
+  &__sum {}
+
+  &__mark {
+    &_green{
+      // background-image: url('../../src/js/pages/currency/img/green-arrow.svg');
+    }
+    &_red{
+       // background-image: url('../../src/js/pages/currency/img/red-arrow.svg');
+    }
+  }
+}
