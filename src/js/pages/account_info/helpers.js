@@ -58,7 +58,8 @@ export const dataToChart = (obj) => {
   const lastTransaction = data[data.length - 1];
   const lastDate = lastTransaction.date;
   const lastMonth = new Date(lastDate).getMonth();
-  console.log(lastMonth)
+  console.log('Данные для подготовки чарта', obj);
+  console.log(lastMonth);
   // const middle = data[Math.round((data.length - 1) / 2)];
   console.log(lastDate, 'lastDate');
 };

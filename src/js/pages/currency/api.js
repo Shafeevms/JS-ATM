@@ -8,5 +8,5 @@ export const openSocket = () => {
   const socket = new WebSocket('ws://localhost:3000/currency-feed');
   socket.onmessage = (ev) => console.log(ev.data);
   socket.onclose = () => console.log('Соедиенние закрыто');
-  setTimeout(() => socket.close(), 5000);
+  setTimeout(() => socket.close(), 15000);
 };

@@ -2,7 +2,7 @@ import './index.scss';
 import { renderComponent } from '../../helpers';
 import { headerButtonsComponent } from '../../components';
 import currencyPageComponent from './components';
-import { getAllCurrencies, getClientCurrencies, currencyBuy } from './api';
+import { getAllCurrencies, getClientCurrencies } from './api';
 
 const header = document.querySelector('.header__container');
 
