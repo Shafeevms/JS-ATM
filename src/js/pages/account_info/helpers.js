@@ -51,19 +51,4 @@ export const filterStringInArray = (array, value) => (
   array.filter((el) => el.slice(0, value.length) === value)
 );
 
-export const dataToChart = (obj) => {
-  const data = deepClone(obj);
-  // const TWELVE_MONTHS_IN_MLSECONDS = 31557600000;
-  // console.log(data)
-  const lastTransaction = data[data.length - 1];
-  const lastDate = lastTransaction.date;
-  const lastMonth = new Date(lastDate).getMonth();
-  console.log('Данные для подготовки чарта', obj);
-  console.log(lastMonth);
-  // const middle = data[Math.round((data.length - 1) / 2)];
-  console.log(lastDate, 'lastDate');
-};
 
-// const toDateStamp = (date) => Date.parse(date);
-
-const deepClone = (arr) => JSON.parse(JSON.stringify(arr));
