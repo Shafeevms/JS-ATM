@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import { loginPage } from './pages/login';
 import { accountsPage } from './pages/accounts';
-import { ATMPage } from './pages/atm';
+import ATMPage from './pages/atm';
 import { currencyPage } from './pages/currency';
 
 export const redirect = (path) => window.history.pushState(null, '', path);

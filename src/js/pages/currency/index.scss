@@ -16,6 +16,7 @@
 
   &__your-currency {
     grid-area: your;
+    height: 100%;
   }
 
   &__exchange {
@@ -24,6 +25,7 @@
 
   &__real-time {
     grid-area: real;
+    height: 100%;
   }
 }
 
@@ -121,6 +123,7 @@
 
 .real-time {
   padding: 50px;
+  height: 728px;
   background: #E5E5E5;
   border-radius: 50px;
 
@@ -128,7 +131,10 @@
     margin-bottom: 25px;
   }
 
-  &__list {}
+  &__list {
+    height: 100%;
+    overflow: hidden;
+  }
 
   &__line {
     display: flex;

@@ -12,7 +12,7 @@ export const accountsPageComponent = () => {
         <option value="">Сортировка</option>
         <option value="account">По номеру</option>
         <option value="balance">По балансу</option>
-        <option value="date">По последней транзакции</option>
+        <option value="transactions">По последней транзакции</option>
       </select>
       <button class="accounts__btn btn">+ Создать новый счет</button>
     </header>
@@ -30,7 +30,7 @@ export const accountCardComponent = (obj) => {
   li.className = 'accounts__card card';
   li.innerHTML = `
     <h3 class="card__account">${account}</h3>
-    <span class="card__account-sum">${balance}</span>
+    <span class="card__account-sum">${balance.toFixed(2)}</span>
     <h4 class="card__title_last">Последняя транзакция:</h4>
     <span class="card__date">${ISODateToText(lastDate)}</span>
     <button class="card__btn btn">Открыть</button>`;

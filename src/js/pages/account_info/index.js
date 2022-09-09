@@ -19,6 +19,7 @@ export const getHistoryBalance = (payloadBalance, PERIOD = 24) => {
   const chartData = [];
   const currentYear = dayjs().year();
   const { transactions, balance, account } = payloadBalance;
+  console.log(transactions)
 
   for (let i = 0; i < PERIOD; i++) {
     const date = dayjs().subtract(i, 'month');
@@ -60,5 +61,5 @@ export const getHistoryBalance = (payloadBalance, PERIOD = 24) => {
     }, chartData)
     ;
 
-  console.log(preparedBalance);
+  // console.log(preparedBalance);
 };

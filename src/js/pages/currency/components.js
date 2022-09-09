@@ -2,7 +2,6 @@ import { openSocket, currencyBuy } from './api';
 
 const currencyPageComponent = (data) => {
   const div = document.createElement('div');
-  openSocket();
   const [{ payload: allCurrencies }, { payload: clientCurrencies }] = data;
 
   //! allCurrencies - arr; clientCurrencies - obj;
@@ -42,12 +41,7 @@ const currencyPageComponent = (data) => {
     <section class="currency__real-time real-time">
       <h3 class="real-time__title">Изменение курсов в реальном времени</h3>
       <ul class="real-time__list">
-        <li class="real-time__line">
-          <div class="real-time__name">BTC/ETH</div>
-          <div class="real-time__dots"></div>
-          <div class="real-time__sum">6.3123545131</div>
-          <div class="real-time__mark"></div>
-        </li>
+
       </ul>
     </section>
   </div>`;
@@ -58,8 +52,10 @@ const currencyPageComponent = (data) => {
   const exchangeSum = div.querySelector('.exchange__sum');
   const currencyList = div.querySelector('.your-currency__list');
   const mistake = div.querySelector('.exchange__mistake');
+  const realTimeCurrencyList = div.querySelector('.real-time__list');
 
   formListener(form, currencyFrom, currencyTo, exchangeSum, currencyList, mistake);
+  openSocket(realTimeCurrencyList);
 
   return div;
 };
@@ -106,5 +102,16 @@ const clientCurrencyReducer = (obj) => (
 );
 
 const makeCurrencyOptions = (arr) => arr.reduce((acc, el) => acc += `<option>${el}</option>`, '');
+
+export const makeRealTimeLines = (message) => {
+  const { from, to, rate, change } = JSON.parse(message);
+  const li = document.querySelector('li');
+  li.classList.add('real-time__line');
+  li.innerHTML = `<div class="real-time__name">${from}/${to}</div>
+                  <div class="real-time__dots"></div>
+                  <div class="real-time__sum">${rate}</div>
+                  <div class="real-time__mark"></div>`;
+  return li;
+};
 
 export default currencyPageComponent;
