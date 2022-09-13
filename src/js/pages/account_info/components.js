@@ -26,7 +26,7 @@ const infoPageComponent = (data) => {
     </button>
     <div class="details__wrapper">
       <h4 class="details__subtitle">Баланс</h4>
-      <span class="details__amount">${numberWithSpaces(balance)}</span>
+      <span class="details__amount">${numberWithSpaces(balance.toFixed(2))}</span>
     </div>
   </header>
   <section class="details__analytics an">

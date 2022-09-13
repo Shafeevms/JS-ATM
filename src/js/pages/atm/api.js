@@ -1,7 +1,5 @@
 /* eslint-disable no-var */
 /* eslint-disable quotes */
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 /* eslint-disable arrow-body-style */
 
 import { request } from '../../api';
