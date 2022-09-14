@@ -1,8 +1,7 @@
 import { openSocket, currencyBuy } from './api';
 
-const currencyPageComponent = (data) => {
+const currencyPageComponent = ({ allCurrencies, clientCurrencies }) => {
   const div = document.createElement('div');
-  const [{ payload: allCurrencies }, { payload: clientCurrencies }] = data;
 
   //! allCurrencies - arr; clientCurrencies - obj;
 
@@ -96,7 +95,7 @@ const clientCurrencyReducer = (obj) => (
         <li class="your-currency__line currency-line">
           <div class="currency-line__name">${code}</div>
           <div class="currency-line__dots"></div>
-          <div class="currency-line__num">${amount}</div>
+          <div class="currency-line__num">${amount.toFixed(2)}</div>
         </li>`;
     }, '')
 );
@@ -105,12 +104,13 @@ const makeCurrencyOptions = (arr) => arr.reduce((acc, el) => acc += `<option>${e
 
 export const makeRealTimeLines = (message) => {
   const { from, to, rate, change } = JSON.parse(message);
-  const li = document.querySelector('li');
+  console.log(message)
+  const li = document.createElement('li');
   li.classList.add('real-time__line');
   li.innerHTML = `<div class="real-time__name">${from}/${to}</div>
-                  <div class="real-time__dots"></div>
+                  <div class="real-time__dots ${change === 1 ? "real-time__dots_green" : "real-time__dots_red"}"></div>
                   <div class="real-time__sum">${rate}</div>
-                  <div class="real-time__mark"></div>`;
+                  <div class="real-time__mark ${change === 1 ? "real-time__mark_green" : "real-time__mark_red"}"></div>`;
   return li;
 };
 

@@ -8,9 +8,12 @@ const header = document.querySelector('.header__container');
 
 export const currencyPage = async () => {
   renderComponent(header, headerButtonsComponent('currency'));
-  Promise
-    .all([getAllCurrencies(), getClientCurrencies()])
-    .then((res) => renderComponent(root, currencyPageComponent(res)));
+
+  const [{ payload: allCurrencies }, { payload: clientCurrencies }] = await Promise.all([
+    getAllCurrencies(),
+    getClientCurrencies(),
+  ]);
+  renderComponent(root, currencyPageComponent({ allCurrencies, clientCurrencies }));
 };
 
-export const foo = () => {};
+export default currencyPage;

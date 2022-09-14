@@ -12,7 +12,7 @@ import { getAccountId } from './api';
 export const renderAccountInfo = async (id) => {
   root.innerHTML = '';
   const { payload } = await getAccountId(id);
-  getHistoryBalance(payload);
+  console.log(getHistoryBalance(payload));
   userAccount.data = payload;
 
   //? в функции ниже есть асинхронность, нужно ли перед RenderComponent или infoPageComponent ставить await?
@@ -21,108 +21,46 @@ export const renderAccountInfo = async (id) => {
 
 export const getHistoryBalance = (payloadBalance, PERIOD = 60) => {
   const { transactions, balance, account } = payloadBalance;
-  // const currentYear = dayjs().year();
-  // const currentMonth = dayjs().month();
-  const periodDates = [];
-  const monthSplitedData = {};
-
-  // приготовили список месяцев, которые нужны
-  for (let i = 0; i < PERIOD; i++) {
-    const date = dayjs().subtract(i, 'month');
-    periodDates[i] = date.format('YY/MM');
-    monthSplitedData[date.format('YY/MM')] = [];
-  }
+  const monthSplitedData = [];
 
   // приготовили объект в котором помесячно собраны элементы в массивы
-  transactions.forEach((element) => {
-    for (let j = 0; j < periodDates.length - 1; j++) {
-      if (dayjs(element.date).format('YY/MM') === periodDates[j]) {
-        monthSplitedData[periodDates[j]].push(element);
+  for (let j = 0; j < PERIOD; j++) {
+    const date = dayjs().subtract(j, 'month');
+    monthSplitedData[j] = { date: date.format('YY/MM'), transactions: [] };
+    transactions.forEach((transaction) => {
+      if (dayjs(transaction.date).format('YY/MM') === monthSplitedData[j].date) {
+        monthSplitedData[j].transactions.push(transaction);
       }
-    }
-  });
-  const amountsInMonths = getAmountsPerMonths(monthSplitedData, account, balance);
-  console.log(amountsInMonths);
-  // необходимо просчитать в каждом месяце:
-  // - наибольший баланс;
-  // - сумму положительных транзакций;
-  // - сумму отрицательных транзакций;
+    });
+  }
+  return getAmountsPerMonths(monthSplitedData, account, balance);
 };
 
-// функция вытаскивает все транзакции за месяц положительные и отрицательные
-// складывает отдельно все положительные и отрицательные значения за месяц
-
-//! функция не работает? сделать период 24 мес, обновить data.json
-const getAmountsPerMonths = (obj, id, balance) => {
-  const newobj = {};
+const getAmountsPerMonths = (monthData, id, balance) => {
+  const preparedMonthData = [];
   let prevBalance = balance;
-  for (let key in obj) {
+  for (let i = monthData.length; i--;) {
+    preparedMonthData[i] = { prevBalance };
     const tempArr = [];
     let pos = 0;
-    let neg = 0; // [ {}, {date: 22/07},]
-    obj[key].forEach((el) => {
-      const sign = (el.to === id) ? 1 : -1;
-      tempArr.push(el.amount * sign);
+    let neg = 0;
+    monthData[i].transactions.forEach((transaction) => {
+      const sign = (transaction.to === id) ? 1 : -1;
+      tempArr.push(transaction.amount * sign);
     });
     tempArr.forEach((amount) => {
       amount >= 0
         ? pos += amount
         : neg += amount;
     });
-    newobj[key] = { arr: tempArr };
-    newobj[key] = { ...newobj[key], pos: +pos.toFixed(2), neg: +neg.toFixed(2) };
     prevBalance = +(prevBalance - pos + -neg).toFixed(2);
-    //! вот эта цифра должна попадать в следующий объект!!!
-    newobj[key] = { ...newobj[key], prevBalance };
+    preparedMonthData[i] = {
+      ...preparedMonthData[i],
+      transactions: tempArr,
+      pos: +pos.toFixed(2),
+      neg: +neg.toFixed(2),
+      date: monthData[i].date,
+    };
   }
-  return newobj;
+  return preparedMonthData;
 };
-
-// export const getHistoryBalance = (payloadBalance, PERIOD = 24) => {
-//   const chartData = [];
-//   const currentYear = dayjs().year();
-//   const { transactions, balance, account } = payloadBalance;
-//   console.log(transactions)
-
-//   for (let i = 0; i < PERIOD; i++) {
-//     const date = dayjs().subtract(i, 'month');
-
-//     chartData[i] = {
-//       month: date.month(),
-//       year: date.year(),
-//       balance: i === 0 ? balance : 0,
-//     };
-//   }
-
-//   const preparedBalance = transactions
-//     /* .filter(payment => {
-//       const date = dayjs(payment.date);
-//       return chartData.find(item => item.month === date.month())
-//              && chartData.find(item => item.year === date.year());
-//     }) */
-//     .reduceRight((acc, payment) => {
-//       const sign = (payment.to === account) ? 1 : -1;
-//       const paymentDate = dayjs(payment.date);
-
-//       const paymentYear = paymentDate.year();
-//       const currentMonth = paymentDate.month();
-//       const prevMonth = paymentDate.subtract(1, 'month').month();
-
-//       const prevIndex = acc.findIndex(
-//         item => item.month === prevMonth && item.year === paymentYear,
-//       );
-
-//       const currentIndex = acc.findIndex(
-//         item => item.month === currentMonth && item.year === paymentYear,
-//       );
-
-//       if (acc[prevIndex] && acc[currentIndex]) {
-//         acc[prevIndex].balance = +(acc[currentIndex].balance + sign * payment.amount).toFixed(2);
-//       }
-
-//       return acc;
-//     }, chartData)
-//     ;
-
-//   // console.log(preparedBalance);
-// };

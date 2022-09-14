@@ -1,5 +1,3 @@
-import { binarySearch } from '../../helpers';
-
 export function numberWithSpaces(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
@@ -50,5 +48,3 @@ export function clearFormInputs(...args) {
 export const filterStringInArray = (array, value) => (
   array.filter((el) => el.slice(0, value.length) === value)
 );
-
-
