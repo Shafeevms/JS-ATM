@@ -1,4 +1,3 @@
-import Choices from 'choices.js';
 import { ISODateToText } from '../../helpers';
 import { redirect } from '../../router';
 import {
@@ -8,11 +7,42 @@ import {
   showError,
   deleteError,
   filterStringInArray,
+  getHistoryBalance,
+  monthReducer,
+  maxRange,
+  barReducer,
 } from './helpers';
 import { transferAmmount } from './api';
 
 const infoPageComponent = (data) => {
   const { account, balance, transactions } = data;
+  // const preparedDatatoChart = getHistoryBalance(data, 6);
+  const preparedDatatoChart = [
+    {
+      prevBalance: 30000,
+      month: 'сен',
+    },
+    {
+      prevBalance: 40000,
+      month: 'авг',
+    },
+    {
+      prevBalance: 20000,
+      month: 'июл',
+    },
+    {
+      prevBalance: 35000,
+      month: 'июн',
+    },
+    {
+      prevBalance: 30000,
+      month: 'май',
+    },
+    {
+      prevBalance: 45000,
+      month: 'апр',
+    },
+  ];
 
   const div = document.createElement('div');
   div.innerHTML = `
@@ -45,9 +75,16 @@ const infoPageComponent = (data) => {
     </form>
     <div class="an__graphs an_graphs">
       <h2 class="an_graphs__title">Динамика баланса</h2>
-      <div>
-        <canvas id="myChart"></canvas>
+      <ul class="an_graphs__chart">
+        ${barReducer(preparedDatatoChart)}
+      </ul>
+      <div class="an_graphs__range">
+      <span class="an_graphs__max">${maxRange(preparedDatatoChart).toFixed(0)}</span>
+      <span class="an_graphs__max">0</span>
       </div>
+      <ul class="an_graphs__months">
+        ${monthReducer(preparedDatatoChart)}
+      </ul>
     </div>
     <div class="an__history an_history">
       <h2 class="an_history__title">История переводов</h2>
@@ -72,6 +109,8 @@ const infoPageComponent = (data) => {
   const btnBack = div.querySelector('.details__btn');
   const select = div.querySelector('.an_form__autocomlete');
 
+  console.log(preparedDatatoChart);
+
   inputAutoComplete(inputAccount, select);
   minusAmmountDenied(inputSumm);
   deleteError(form);
@@ -83,7 +122,12 @@ const infoPageComponent = (data) => {
 };
 
 const transactionComponent = (obj, currentAccount) => {
-  const { amount, date, from, to } = obj;
+  const {
+    amount,
+    date,
+    from,
+    to,
+  } = obj;
   return `
   <ul class="an-table__body-line">
     <li class="an-table__body-item">${from}</li>
@@ -115,7 +159,6 @@ const formListener = (el, currentAccount, inputAccount, inputSumm) => {
       to: inputAccount.value,
       amount: inputSumm.value,
     };
-    console.log(transferInfo, 'transferInfo');
     const res = await transferAmmount(transferInfo);
     const { error } = res;
     if (error) {

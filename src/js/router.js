@@ -39,6 +39,9 @@ export const routeSwitcher = () => {
       loginPage();
       break;
     case '/accounts':
+      // if (urlParams.get('history') === 'true') {
+      //   somePage(urlParams.get('id'));
+      // }
       accountsPage(urlParams.get('id'));
       break;
     case '/atm':

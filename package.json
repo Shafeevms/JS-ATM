@@ -38,8 +38,6 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "chart.js": "^3.9.1",
-    "choices.js": "^10.1.0",
     "dayjs": "^1.11.5"
   }
 }
