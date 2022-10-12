@@ -11,38 +11,13 @@ import {
   monthReducer,
   maxRange,
   barReducer,
+  barRatioReducer,
 } from './helpers';
 import { transferAmmount } from './api';
 
-const infoPageComponent = (data) => {
+export const infoPageComponent = (data) => {
   const { account, balance, transactions } = data;
-  // const preparedDatatoChart = getHistoryBalance(data, 6);
-  const preparedDatatoChart = [
-    {
-      prevBalance: 30000,
-      month: 'сен',
-    },
-    {
-      prevBalance: 40000,
-      month: 'авг',
-    },
-    {
-      prevBalance: 20000,
-      month: 'июл',
-    },
-    {
-      prevBalance: 35000,
-      month: 'июн',
-    },
-    {
-      prevBalance: 30000,
-      month: 'май',
-    },
-    {
-      prevBalance: 45000,
-      month: 'апр',
-    },
-  ];
+  const preparedDatatoChart = getHistoryBalance(data, 6);
 
   const div = document.createElement('div');
   div.innerHTML = `
@@ -108,6 +83,7 @@ const infoPageComponent = (data) => {
   const form = div.querySelector('.an_form');
   const btnBack = div.querySelector('.details__btn');
   const select = div.querySelector('.an_form__autocomlete');
+  const chart = div.querySelector('.an_graphs');
 
   console.log(preparedDatatoChart);
 
@@ -118,6 +94,78 @@ const infoPageComponent = (data) => {
   formListener(form, account, inputAccount, inputSumm);
 
   btnBack.addEventListener('click', () => redirect('accounts'));
+  chart.addEventListener('click', () => redirect(`accounts?id=${account}&history=true`));
+  return div;
+};
+
+export const historyPageComponent = (data) => {
+  const { account, balance, transactions } = data;
+  const preparedDatatoChart = getHistoryBalance(data, 13);
+
+  const div = document.createElement('div');
+  div.innerHTML = `
+  <div class="details container">
+    <header class="details__header">
+      <h2 class="details__title">История баланса</h2>
+      <h3 class="details__account">${account}</h3>
+      <button class="btn details__btn">
+        <span class="btn-icon btn-icon_arrow"></span>
+        <span class="btn-text">Вернуться назад</span>
+      </button>
+      <div class="details__wrapper">
+        <h4 class="details__subtitle">Баланс</h4>
+        <span class="details__amount">${numberWithSpaces(balance.toFixed(2))}</span>
+      </div>
+    </header>
+    <section class="details__analytics an an_fullpage">
+      <div class="an__graphs an_graphs an_graphs_fullpage">
+        <h2 class="an_graphs__title">Динамика баланса</h2>
+        <ul class="an_graphs__chart">
+          ${barReducer(preparedDatatoChart)}
+        </ul>
+        <div class="an_graphs__range">
+        <span class="an_graphs__max">${maxRange(preparedDatatoChart).toFixed(0)}</span>
+        <span class="an_graphs__max">0</span>
+        </div>
+        <ul class="an_graphs__months">
+          ${monthReducer(preparedDatatoChart)}
+        </ul>
+      </div>
+      <div class="an__ratio an_ratio an_ratio_fullpage">
+        <h2 class="an_ratio__title">Соотношение входящих исходящих транзакций</h2>
+        <ul class="an_ratio__chart">
+          ${barRatioReducer(preparedDatatoChart)}
+        </ul>
+        <div class="an_ratio__range">
+        <span class="an_ratio__max">${maxRange(preparedDatatoChart).toFixed(0)}</span>
+        <span class="an_ratio__max">0</span>
+        </div>
+        <ul class="an_ratio__months">
+          ${monthReducer(preparedDatatoChart, 1)}
+        </ul>
+      </div>
+      <div class="an__history an_history">
+        <h2 class="an_history__title">История переводов</h2>
+        <div class="an__table an-table">
+          <ul class="an-table__header">
+            <li class="an-table__header-item">Счет отправителя</li>
+            <li class="an-table__header-item">Счет получателя</li>
+            <li class="an-table__header-item">Сумма</li>
+            <li class="an-table__header-item">Дата</li>
+          </ul>
+          <ul class="an-table__body">
+            ${transactionHistoryReducer(transactions, account)}
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>`;
+
+  const btnBack = div.querySelector('.details__btn');
+
+  console.log(preparedDatatoChart);
+
+  btnBack.addEventListener('click', () => redirect(`/accounts?id=${account}`));
   return div;
 };
 
@@ -201,5 +249,3 @@ const selectHelper = (select, input) => {
     }
   });
 };
-
-export default infoPageComponent;

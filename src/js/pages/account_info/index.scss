@@ -77,8 +77,25 @@
   grid-template-rows: 288px 1fr;
   grid-template-areas:
     "form graphs"
+    "ratio ratio"
     "history history";
   gap: 50px;
+
+  &_fullpage {
+    grid-template-rows: 288px 288px 1fr;
+    grid-template-areas:
+    "graphs graphs"
+    "ratio ratio"
+    "history history";
+  }
+
+  &__graphs {
+    grid-area: graphs;
+  }
+
+  &__ratio {
+    grid-area: ratio;
+  }
 }
 
 .an_form {
@@ -183,9 +200,14 @@
   }
 }
 
-.an_graphs {
+.an_ratio {
+
+}
+
+.an_graphs,
+.an_ratio {
   padding: 25px 50px 20px;
-  grid-area: graphs;
+
 
   display: grid;
   grid-template-rows: 39px 165px 38px;
@@ -197,6 +219,27 @@
 
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
+  cursor: pointer;
+
+  &_fullpage {
+    grid-template-columns: 1fr 150px;
+    cursor: auto;
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+  }
+
+  &__pos {
+    background-color: #76CA66;
+  }
+
+  &__neg {
+    background-color: #FD4E5D;
+  }
 
   &__title {
     grid-area: title;
@@ -211,6 +254,10 @@
     align-items: flex-end;
     justify-content: space-between;
     outline: 1px solid black;
+  }
+
+  &__empty-bar {
+    width: 50px;
   }
 
   &__bar {

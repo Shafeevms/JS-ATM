@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs';
+const dayjs = require('dayjs');
 
 export function numberWithSpaces(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -57,7 +57,8 @@ export const getHistoryBalance = (payloadBalance, PERIOD = 6) => {
 
   for (let j = 0; j < PERIOD; j++) {
     const date = dayjs().subtract(j, 'month');
-    monthSplitedData[j] = { date: date.format('YY/MM'), transactions: [] };
+    const prevMonth = dayjs(date).subtract(1, 'month').format('YY/MM');
+    monthSplitedData[j] = { date: date.format('YY/MM'), prevMonth, transactions: [] };
     transactions.forEach((transaction) => {
       if (dayjs(transaction.date).format('YY/MM') === monthSplitedData[j].date) {
         monthSplitedData[j].transactions.push(transaction);
@@ -70,7 +71,7 @@ export const getHistoryBalance = (payloadBalance, PERIOD = 6) => {
 const getAmountsPerMonths = (monthData, id, balance) => {
   const preparedMonthData = [];
   let prevBalance = balance;
-  for (let i = monthData.length; i--;) {
+  for (let i = 0; i < monthData.length; i++) {
     preparedMonthData[i] = { prevBalance };
     const tempArr = [];
     let pos = 0;
@@ -87,14 +88,17 @@ const getAmountsPerMonths = (monthData, id, balance) => {
     prevBalance = +(prevBalance - pos + -neg).toFixed(2);
     preparedMonthData[i] = {
       ...preparedMonthData[i],
+      balance: prevBalance,
       transactions: tempArr,
       pos: +pos.toFixed(2),
       neg: +neg.toFixed(2),
       date: monthData[i].date,
       month: getMonth(monthData[i].date),
+      prevMonth: getMonth(monthData[i].prevMonth),
     };
   }
-  return preparedMonthData;
+
+  return [{ balance, prevMonth: getMonth(dayjs().format('YY/MM')) }, ...preparedMonthData];
 };
 
 const getMonth = (str) => {
@@ -102,15 +106,47 @@ const getMonth = (str) => {
   return months[str.split('/')[1] - 1];
 };
 
-export const monthReducer = (preparedData) => preparedData.reduceRight((acc, el) => {
-  return acc += `<li class="an_graphs__month">${el.month}</li>`;
+export const monthReducer = (preparedData, cut = 0) => preparedData.reduceRight((acc, el, index) => {
+  if (index !== preparedData.length - cut) {
+    acc += `<li class="an_graphs__month">${el.prevMonth}</li>`;
+  }
+  return acc;
 }, '');
 
-export const maxRange = (preparedData) => Math.max.apply(null, preparedData.map(el => el.prevBalance));
+export const maxRange = (preparedData) => (
+  Math.max.apply(null, preparedData.map((el) => el.balance))
+);
+
+const maxRatioRange = (preparedData) => {
+  const temp = preparedData.map((el) => {
+    if (el.pos || el.neg) {
+      return el.pos - el.neg;
+    } else return 0;
+  });
+  return (Math.max.apply(null, temp)).toFixed(2);
+};
 
 export const barReducer = (preparedData) => {
   const max = maxRange(preparedData);
   return preparedData.reduceRight((acc, el) => {
-    return acc += `<li class="an_graphs__bar" style="height: ${Math.floor(el.prevBalance / max * 100)}%"></li>`;
+    return acc += `<li class="an_graphs__bar" style="height: ${Math.floor(el.balance / max * 100)}%"></li>`;
+  }, '');
+};
+
+export const barRatioReducer = (preparedData) => {
+  const max = maxRatioRange(preparedData);
+  return preparedData.reduceRight((acc, el, index) => {
+    if (index > 0) {
+      const height = +((el.pos - el.neg) / max * 100).toFixed(0) || 0;
+      const pos = +(el.pos / max * 100).toFixed(0) || 0;
+      const neg = height - pos;
+      acc += `<li class="an_ratio__empty-bar" style="height: ${height}%" data-month=${el.date}>
+        <ul class="an_ratio__col">
+          <li class="an_ratio__pos" style="height: ${pos}%"></li>
+          <li class="an_ratio__neg" style="height: ${neg}%"></li>
+        </ul>
+      </li>`;
+    }
+    return acc;
   }, '');
 };

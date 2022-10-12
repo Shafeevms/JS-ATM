@@ -14,7 +14,7 @@ export const renderCards = async () => {
 };
 
 export const accountsPage = async (id) => {
-  headerButtonsEnable();
+  headerButtonsEnable('accounts');
   if (id) {
     await renderAccountInfo(id);
   } else {

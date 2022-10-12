@@ -3,6 +3,7 @@ import { loginPage } from './pages/login';
 import { accountsPage } from './pages/accounts';
 import ATMPage from './pages/atm';
 import { currencyPage } from './pages/currency';
+import { historyPage } from './pages/account_info/historyPage';
 
 export const redirect = (path) => window.history.pushState(null, '', path);
 
@@ -39,9 +40,10 @@ export const routeSwitcher = () => {
       loginPage();
       break;
     case '/accounts':
-      // if (urlParams.get('history') === 'true') {
-      //   somePage(urlParams.get('id'));
-      // }
+      if (urlParams.get('history') === 'true') {
+        historyPage(urlParams.get('id'));
+        break;
+      }
       accountsPage(urlParams.get('id'));
       break;
     case '/atm':

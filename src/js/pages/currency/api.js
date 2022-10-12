@@ -14,6 +14,6 @@ export const openSocket = (list) => {
       list.removeChild(list.getElementsByTagName('li')[0]);
     }
   };
-  socket.onclose = () => console.log('Соединение закрыто');
-  setTimeout(() => socket.close(), 20000);
+  // socket.onclose = () => console.log('Соединение закрыто');
+  // setTimeout(() => socket.close(), 20000);
 };

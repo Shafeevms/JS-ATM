@@ -32,10 +32,10 @@ const traslateMonthRu = (num) => {
   return months[num];
 };
 
-export const headerButtonsEnable = () => {
+export const headerButtonsEnable = (getUrl) => {
   const header = document.querySelector('.header__container');
   header.lastElementChild !== document.querySelector('.header__wrapper')
-  && renderComponent(header, headerButtonsComponent('accounts'));
+  && renderComponent(header, headerButtonsComponent(getUrl));
 };
 
 export function binarySearch(value, list) {
