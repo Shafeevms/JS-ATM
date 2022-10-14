@@ -42,18 +42,17 @@
     height: 95%;
     overflow: auto;
   }
-
-  &__line {
-  }
 }
 
 .currency-line {
   display: flex;
   justify-content: space-between;
   gap: 10px;
+
   &__name {
     letter-spacing: 0.1em;
   }
+
   &:not(:last-child) {
     margin-bottom: 25px;
   }
@@ -62,8 +61,6 @@
     width: 100%;
     border-bottom: 1px dotted black;
   }
-
-  &__num {}
 }
 
 .exchange {
@@ -94,10 +91,12 @@
   &__wrapper {
     display: flex;
     align-items: baseline;
+
     &_fst-line {
       grid-area: transact;
       gap: 20px;
     }
+
     &_snd-line {
       grid-area: sum;
       gap: 8px;
@@ -141,6 +140,7 @@
     display: flex;
     justify-content: space-between;
     gap: 10px;
+
     &:not(:last-child) {
       margin-bottom: 25px;
     }
@@ -155,27 +155,28 @@
     width: 100%;
     border-bottom: 1px dotted;
     border-color: rgb(147, 201, 147);
+
     &_green {
       border-color: green;
     }
+
     &_red {
       border-color: red;
     }
   }
-
-  &__sum {}
 
   &__mark {
     height: 20px;
     width: 25px;
     background-repeat: no-repeat;
     background-position: center;
-    &_green{
+
+    &_green {
       background-image: url('./img/green-arrow.svg');
     }
-    &_red{
-       background-image: url('./img/red-arrow.svg');
+
+    &_red {
+      background-image: url('./img/red-arrow.svg');
     }
   }
 }
-

@@ -104,7 +104,6 @@ const makeCurrencyOptions = (arr) => arr.reduce((acc, el) => acc += `<option>${e
 
 export const makeRealTimeLines = (message) => {
   const { from, to, rate, change } = JSON.parse(message);
-  console.log(message)
   const li = document.createElement('li');
   li.classList.add('real-time__line');
   li.innerHTML = `<div class="real-time__name">${from}/${to}</div>

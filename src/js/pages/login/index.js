@@ -14,6 +14,7 @@ const removeHeaderButtons = () => {
 };
 
 export const loginPage = (error) => {
+  sessionStorage.removeItem('token');
   removeHeaderButtons();
   root.innerHTML = '';
   renderComponent(root, loginComponent(error));

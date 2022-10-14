@@ -47,16 +47,12 @@
     width: 100%;
   }
 
-  &__subtitle {}
-
   &__amount {
     &::after {
       margin-left: 3px;
       content: '\20BD';
     }
   }
-
-  &__analytics {}
 }
 
 .btn-icon {
@@ -171,8 +167,6 @@
     -webkit-appearance: none;
   }
 
-  &__option {}
-
   &__btn {
     display: flex;
     align-items: center;
@@ -200,14 +194,9 @@
   }
 }
 
-.an_ratio {
-
-}
-
 .an_graphs,
 .an_ratio {
   padding: 25px 50px 20px;
-
 
   display: grid;
   grid-template-rows: 39px 165px 38px;
@@ -313,17 +302,12 @@
     color: #fff;
   }
 
-  &__header-item {
-  }
 
   &__body-line {
     padding: 20px 49px;
     display: grid;
     grid-template-columns: minmax(240px, 300px) minmax(240px, 300px) minmax(100px, 160px) 150px 1fr;
     border-bottom: 2px solid rgba(0, 82, 255, 0.1);
-  }
-
-  &__body-item {
   }
 
   &__summ {
@@ -356,9 +340,6 @@
 
   &_email {}
 }
-
-.btn-text {}
-
 
 .valid {
   border-color: green;

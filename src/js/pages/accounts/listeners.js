@@ -17,7 +17,6 @@ export const sortAccounts = (e) => {
   data
     .sort((a, b) => compareFn(a, b, option))
     .forEach((card) => renderComponent(list, accountCardComponent(card)));
-  console.log(data, data.sort((a, b) => a.option - b.option));
 };
 
 const compareFn = (a, b, option) => {

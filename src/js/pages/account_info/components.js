@@ -163,8 +163,6 @@ export const historyPageComponent = (data) => {
 
   const btnBack = div.querySelector('.details__btn');
 
-  console.log(preparedDatatoChart);
-
   btnBack.addEventListener('click', () => redirect(`/accounts?id=${account}`));
   return div;
 };

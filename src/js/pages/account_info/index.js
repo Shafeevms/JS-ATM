@@ -1,5 +1,5 @@
-import { renderComponent } from '../../helpers';
 import './index.scss';
+import { renderComponent } from '../../helpers';
 import { infoPageComponent } from './components';
 import { userAccount } from '../../store';
 import { getAccountId } from './api';
