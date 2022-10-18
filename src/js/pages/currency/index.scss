@@ -180,3 +180,36 @@
     }
   }
 }
+
+.sk-currency {
+
+  &__name,
+  &__num,
+  &__rt-name,
+  &__rt-sum {
+    background-color: $skeleton;
+    border-radius: 10px;
+    height: 23px;
+  }
+
+  &__name {
+    width: 45px;
+  }
+
+  &__num {
+    width: 100px;
+  }
+
+  &__rt-name {
+    width: 101px;
+  }
+
+  &__rt-sum {
+    width: 146px;
+  }
+
+  &__dots,
+  &__rt-dots {
+    border-bottom: 1px dotted $skeleton;
+  }
+}

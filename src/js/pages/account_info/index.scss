@@ -73,7 +73,6 @@
   grid-template-rows: 288px 1fr;
   grid-template-areas:
     "form graphs"
-    "ratio ratio"
     "history history";
   gap: 50px;
 
@@ -92,12 +91,16 @@
   &__ratio {
     grid-area: ratio;
   }
+
+  &__form {
+    grid-area: form;
+  }
 }
 
 .an_form {
   position: relative;
   padding: 25px 50px;
-  grid-area: form;
+  // grid-area: form;
   display: grid;
   grid-template-rows: 24px 44px 44px 52px;
   grid-template-columns: minmax(50px, 1fr) minmax(100px, 300px);
@@ -336,11 +339,6 @@
   }
 }
 
-.btn-icon {
-
-  &_email {}
-}
-
 .valid {
   border-color: green;
 }
@@ -351,4 +349,167 @@
 
 .visible {
   visibility: visible;
+}
+
+.details-skeleton {
+  padding-top: 50px;
+
+  &__header {
+    margin-bottom: 50px;
+  }
+
+  &__account,
+  &__btn,
+  &__subtitle,
+  &__amount {
+    width: 100%;
+    background-color: $skeleton;
+    border-radius: 10px;
+  }
+
+
+  &__title {
+    grid-area: title;
+    height: 40px;
+    max-width: 275px;
+  }
+
+  &__account {
+    grid-area: acc;
+    height: 40px;
+    max-width: 367px;
+  }
+
+  &__btn {
+    grid-area: btn;
+    height: 56px;
+    max-width: 209px;
+    justify-self: end;
+  }
+
+  &__wrapper {
+    max-width: 209px;
+  }
+
+  &__subtitle {
+    margin-right: 50px;
+    height: 23px;
+    max-width: 72px;
+  }
+
+  &__amount {
+    height: 23px;
+    max-width: 79px;
+  }
+
+  &__section {}
+
+  &__form {}
+
+  &__chart {}
+}
+
+.sk-form {
+
+  &__title {
+    grid-area: legend;
+  }
+
+  &__subtitle,
+  &__choise,
+  &__input,
+  &__btn {
+    width: 100%;
+    background-color: #FFF;
+    border-radius: 15px;
+  }
+
+
+  &__subtitle {
+    height: 20px;
+    width: 100%;
+
+    &_long {
+      max-width: 188px;
+      grid-area: label_select;
+    }
+
+    &_short {
+      max-width: 127px;
+      grid-area: label_input;
+    }
+  }
+
+  &__choise,
+  &__input {
+    max-width: 300px;
+    height: 44px;
+  }
+
+  &__choise {
+    grid-area: select;
+  }
+
+  &__input {
+    grid-area: input;
+  }
+
+  &__btn {
+    grid-area: btn;
+    max-width: 164px;
+  }
+}
+
+.sk-chart {
+  cursor: auto;
+
+  &__title {}
+
+  &__bars {
+    outline: 1px solid $skeleton;
+  }
+
+  &__bar {
+    max-width: 50px;
+    width: 100%;
+    background-color: $skeleton;
+  }
+
+  &__price {
+    width: 100%;
+    height: 23px;
+    background-color: $skeleton;
+    border-radius: 10px;
+
+
+    &_top {
+      max-width: 49px;
+    }
+
+    &_bottom {
+      max-width: 13px;
+    }
+  }
+
+  &__months {
+    padding-left: 35px;
+    padding-right: 35px;
+    grid-area: month;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__month {
+    height: 23px;
+    width: 50px;
+    background-color: $skeleton;
+    border-radius: 10px;
+  }
+
+  &__item {
+    height: 24px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
 }
