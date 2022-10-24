@@ -239,8 +239,6 @@ const inputAutoComplete = ((input, select) => {
 
 const selectHelper = (select, input) => {
   select.addEventListener('click', (e) => {
-    console.log(e.target === select.querySelector('li'), 'интересно почему false');
-    // ниже делал условие как в console.log - не работало;
     if (e.target.closest('li')) {
       input.value = e.target.innerText;
       select.classList.remove('visible');

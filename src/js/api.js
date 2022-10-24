@@ -6,7 +6,7 @@ export const request = async ({ method = 'GET', URL, data }) => {
   const params = {
     method,
     headers: {
-      'Content-Type': 'application/json;charset=utf-8',
+      'Content-Type': 'application/json; charset=utf-8',
       Authorization: token ? `Basic ${token}` : null,
     },
   };

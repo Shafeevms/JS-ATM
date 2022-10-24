@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-expressions */
 import { loginPage } from './pages/login';
-import { accountsPage } from './pages/accounts';
+import accountsPage from './pages/accounts';
 import ATMPage from './pages/atm';
-import { currencyPage } from './pages/currency';
+import currencyPage from './pages/currency';
 import { historyPage } from './pages/account_info/historyPage';
+import renderAccountInfo from './pages/account_info';
 
 export const redirect = (path) => window.history.pushState(null, '', path);
 
@@ -31,6 +32,12 @@ export const createURLChangeEvent = () => {
 export const routeSwitcher = () => {
   const { pathname, search } = window.location;
   const urlParams = new URLSearchParams(search);
+  const id = urlParams.get('id');
+
+  // const routesMap = [
+  //   { path: '/accounts', module: accountsPage },
+  //   { path: '/accounts/:id', module: renderAccountInfo },
+  // ];
 
   switch (pathname) {
     case '/':
@@ -41,10 +48,14 @@ export const routeSwitcher = () => {
       break;
     case '/accounts':
       if (urlParams.get('history') === 'true') {
-        historyPage(urlParams.get('id'));
+        historyPage(id);
         break;
       }
-      accountsPage(urlParams.get('id'));
+      if (id) {
+        renderAccountInfo(id);
+        break;
+      }
+      accountsPage();
       break;
     case '/atm':
       ATMPage();

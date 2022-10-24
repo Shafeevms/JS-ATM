@@ -1,16 +1,13 @@
+import { module, component } from '../../core';
+import atmPage from './atmPage';
+import controller from './controller';
 import './index.scss';
-import { headerButtonsEnable, renderComponent } from '../../helpers';
-import { headerButtonsComponent } from '../../components';
-import atmPageComponent from './component';
-import yandexMapScript from './api';
 
-const header = document.querySelector('.header__container');
+const page = () => component({
+  template: atmPage,
+  controller,
+});
 
-const ATMPage = () => {
-  headerButtonsEnable('atm');
-  root.innerHTML = '';
-  renderComponent(root, atmPageComponent());
-  yandexMapScript();
-};
-
-export default ATMPage;
+export default module({
+  component: page,
+});

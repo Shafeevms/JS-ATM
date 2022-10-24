@@ -1,12 +1,12 @@
-import { renderCards } from './index';
+import accountsPage from '.';
 import { createAccount } from '../../api';
 import { userAccount } from '../../store';
 import { renderComponent } from '../../helpers';
-import { accountCardComponent } from './components';
+import accountCardComponent from './AccountCardPage';
 
 export const openNewAccount = async () => {
   await createAccount();
-  renderCards();
+  accountsPage();
 };
 
 export const sortAccounts = (e) => {
@@ -21,8 +21,8 @@ export const sortAccounts = (e) => {
 
 const compareFn = (a, b, option) => {
   if (option === 'transactions') {
-    const dateA = Date.parse(a[option][a[option].length - 1].date);
-    const dateB = Date.parse(b[option][b[option].length - 1].date);
+    const dateA = Date.parse(a[option][a[option].length - 1]?.date);
+    const dateB = Date.parse(b[option][b[option].length - 1]?.date);
     return dateB - dateA;
   }
   return b[option] - a[option];

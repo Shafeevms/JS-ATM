@@ -1,21 +1,15 @@
+import { module, component } from '../../core';
+import getCurrencies from './api/getCurrencies';
+import currencyPage from './templates/currencyPage';
+import CurrencySkeletonPage from './templates/currencySkeletonPage';
+import controller from './controller';
+
 import './index.scss';
-import { headerButtonsEnable, renderComponent } from '../../helpers';
-import { currencyPageComponent, currencySkeletonPage } from './components';
-import { getAllCurrencies, getClientCurrencies } from './api';
 
-const header = document.querySelector('.header__container');
+const page = (data) => component({ template: currencyPage, controller, data });
 
-export const currencyPage = async () => {
-  headerButtonsEnable('currency');
-  root.innerHTML = '';
-  renderComponent(root, currencySkeletonPage());
-
-  const [{ payload: allCurrencies }, { payload: clientCurrencies }] = await Promise.all([
-    getAllCurrencies(),
-    getClientCurrencies(),
-  ]);
-  root.innerHTML = '';
-  renderComponent(root, currencyPageComponent({ allCurrencies, clientCurrencies }));
-};
-
-export default currencyPage;
+export default module({
+  component: page,
+  componentSkeleton: CurrencySkeletonPage,
+  getData: getCurrencies,
+});
