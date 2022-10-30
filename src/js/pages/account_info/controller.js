@@ -1,14 +1,18 @@
+import { headerButtonsEnable } from '../../helpers';
 import { redirect } from '../../router';
+import { userAccount } from '../../store';
+import { transferAmmount } from './api';
 import {
   minusAmmountDenied,
   deleteError,
   filterStringInArray,
-  getHistoryBalance,
+  saveAccountToLocalStorage,
+  showError,
 } from './helpers';
 
-const controller = (html, data) => {
-  const { account } = data;
-  const preparedDatatoChart = getHistoryBalance(data, 6);
+const controller = (html) => {
+  headerButtonsEnable('accounts');
+  const { account } = userAccount.data;
   const inputAccount = html.querySelector('.an_form__select');
   const inputSumm = html.querySelector('.an_form__summ');
   const form = html.querySelector('.an_form');
@@ -26,11 +30,14 @@ const controller = (html, data) => {
   chart.addEventListener('click', () => redirect(`accounts?id=${account}&history=true`));
 };
 
+
+//! продолжить от этой функции = разделить ее и заодно исправить сам список
 const inputAutoComplete = ((input, select) => {
   let arrayAccounts = [];
   let options = '';
   input.addEventListener('input', (e) => {
     e.preventDefault();
+    if (!localStorage.getItem('accounts')) return;
     if (arrayAccounts.length === 0) {
       arrayAccounts = [...JSON.parse(localStorage.getItem('accounts'))];
     }
@@ -42,7 +49,10 @@ const inputAutoComplete = ((input, select) => {
         return '<li class="an_form__autocomlet-item">' + acc + '</li>';
       }, '');
       select.innerHTML = options;
-    } else select.innerHTML = '';
+    } if (input.value.length === 0) {
+      select.innerHTML = '';
+      select.classList.remove('visible');
+    }
   });
 });
 
@@ -63,6 +73,7 @@ const formListener = (el, currentAccount, inputAccount, inputSumm) => {
       to: inputAccount.value,
       amount: inputSumm.value,
     };
+
     const res = await transferAmmount(transferInfo);
     const { error } = res;
     if (error) {

@@ -1,5 +1,7 @@
-const accountsInfoSkeleton = () => `
-  <div class="container details-skeleton">
+const accountsInfoSkeleton = () => {
+  const div = document.createElement('div');
+  div.classList = 'container details-skeleton';
+  div.innerHTML = `
     <header class=" details__header details-skeleton__header">
       <h2 class="details-skeleton__title">Просмотр счёта</h2>
       <div class="details-skeleton__account loading"></div>
@@ -70,7 +72,8 @@ const accountsInfoSkeleton = () => `
           </ul>
         </div>
       </div>
-    </section>
-  </div>`;
+    </section>`;
+  return div;
+};
 
 export default accountsInfoSkeleton;

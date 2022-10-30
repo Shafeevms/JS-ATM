@@ -1,7 +1,8 @@
 import clientCurrencyChunk from './clientCurrency';
 import currencyOptionsChunk from './currencyOptions';
 
-const currencyPage = ({ clientCurrencies, allCurrencies }) => `<div class="currency container">
+const currencyPage = ({ clientCurrencies, allCurrencies }) => `
+  <div class="currency container">
     <h2 class="currency__title title">Валютный обмен</h2>
     <section class="currency__your-currency your-currency">
       <h3 class="your-currency__title">Ваши валюты</h3>

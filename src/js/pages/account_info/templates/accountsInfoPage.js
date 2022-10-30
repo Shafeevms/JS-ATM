@@ -1,4 +1,18 @@
-const accountInfoPage = () => `
+import { userAccount } from '../../../store';
+import {
+  getHistoryBalance,
+  numberWithSpaces,
+  barReducer,
+  maxRange,
+  monthReducer,
+} from '../helpers';
+
+import transactionHistoryReducer from '../chunks/transactionHistoryChunk';
+
+const accountInfoPage = () => {
+  const { account, balance, transactions } = userAccount.data;
+  const preparedDatatoChart = getHistoryBalance(userAccount.data, 6);
+  return `
   <div class="details container">
     <header class="details__header">
       <h2 class="details__title">Просмотр счёта</h2>
@@ -55,5 +69,6 @@ const accountInfoPage = () => `
       </div>
     </section>
   </div>`;
+};
 
 export default accountInfoPage;

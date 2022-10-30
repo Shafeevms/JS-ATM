@@ -1,20 +1,34 @@
-import './index.scss';
-import { renderComponent } from '../../helpers';
-import { infoPageComponent, accountSkeletonPage } from './components';
-import { userAccount } from '../../store';
+import { component, module } from '../../core';
 import { getAccountId } from './api';
-import { headerButtonsEnable } from '../../helpers.js'
+import controller from './controller';
+import accountInfoPage from './templates/accountsInfoPage';
+import accountsInfoSkeleton from './templates/accountsInfoSkeleton';
 
-const renderAccountInfo = async (id) => {
-  headerButtonsEnable('accounts');
-  root.innerHTML = '';
-  renderComponent(root, accountSkeletonPage());
-  const { payload } = await getAccountId(id);
-  userAccount.data = payload;
+import './index.scss';
+// import { renderComponent } from '../../helpers';
+// import { infoPageComponent, accountSkeletonPage } from './components';
+// import { userAccount } from '../../store';
+// import { getAccountId } from './api';
+// import { headerButtonsEnable } from '../../helpers.js'
 
-  root.innerHTML = '';
-  //? в функции ниже есть асинхронность, нужно ли перед RenderComponent или infoPageComponent ставить await?
-  renderComponent(root, infoPageComponent(payload));
-};
+// const renderAccountInfo = async (id) => {
+//   headerButtonsEnable('accounts');
+//   root.innerHTML = '';
+//   renderComponent(root, accountSkeletonPage());
+//   const { payload } = await getAccountId(id);
+//   userAccount.data = payload;
 
-export default renderAccountInfo;
+//   root.innerHTML = '';
+//   //? в функции ниже есть асинхронность, нужно ли перед RenderComponent или infoPageComponent ставить await?
+//   renderComponent(root, infoPageComponent(payload));
+// };
+
+// export default renderAccountInfo;
+
+const page = (_, params) => component({ template: accountInfoPage, controller, data: params });
+
+export default module({
+  component: page,
+  componentSkeleton: accountsInfoSkeleton,
+  getData: getAccountId,
+});

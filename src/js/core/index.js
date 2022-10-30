@@ -13,13 +13,16 @@ export const module = ({
     parent.innerHTML = '';
     parent.appendChild(componentSkeleton());
   }
-  if (parent.tagName !== 'UL') {
-    parent.innerHTML = '';
-  }
+
   if (typeof component !== 'function') {
     console.error('Module component должен быть функцией!');
   }
-  const data = typeof getData === 'function' ? await getData() : undefined;
+
+  const data = typeof getData === 'function' ? await getData(params) : undefined;
+
+  if (parent.tagName !== 'UL') {
+    parent.innerHTML = '';
+  }
   const html = component(data, params);
   parent.appendChild(html);
 };
