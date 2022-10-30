@@ -85,8 +85,6 @@ export const infoPageComponent = (data) => {
   const select = div.querySelector('.an_form__autocomlete');
   const chart = div.querySelector('.an_graphs');
 
-  console.log(preparedDatatoChart);
-
   inputAutoComplete(inputAccount, select);
   minusAmmountDenied(inputSumm);
   deleteError(form);

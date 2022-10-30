@@ -1,22 +1,22 @@
 import accountsPage from '.';
 import { createAccount } from '../../api';
 import { userAccount } from '../../store';
-import { renderComponent } from '../../helpers';
-import accountCardComponent from './AccountCardPage';
+import { module } from '../../core';
+import cardPage from '../../components/card';
 
-export const openNewAccount = async () => {
-  await createAccount();
+export const openAccountHandler = () => {
+  createAccount();
   accountsPage();
 };
 
-export const sortAccounts = (e) => {
+export const sortAccountsHandler = (e) => {
   const list = document.querySelector('.accounts__cardlist');
   const option = e.target.value;
   const { data } = userAccount;
   list.innerHTML = '';
   data
     .sort((a, b) => compareFn(a, b, option))
-    .forEach((card) => renderComponent(list, accountCardComponent(card)));
+    .forEach((card) => module({ component: cardPage, parent: list })(card));
 };
 
 const compareFn = (a, b, option) => {

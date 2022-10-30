@@ -1,9 +1,10 @@
 import fetchLogin from './api';
 import formDataToObject from './helpers';
-import { loginResponse } from './index';
+import { redirect } from '../../router';
+import login from '.';
 import { isLoginValid, addValidationClasses } from '../../validation';
 
-const checkLogin = async (e) => {
+const loginHandler = async (e) => {
   e.preventDefault();
   const formData = formDataToObject(new FormData(e.target));
   const areInputsCorrect = isLoginValid(formData);
@@ -14,4 +15,13 @@ const checkLogin = async (e) => {
   }
 };
 
-export default checkLogin;
+const loginResponse = (obj) => {
+  const { payload, error } = obj;
+  if (payload) {
+    sessionStorage.setItem('token', payload.token);
+    redirect('accounts');
+  } else login(error);
+  // } else throw new Error(error);
+};
+
+export default loginHandler;

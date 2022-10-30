@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { loginPage } from './pages/login';
+import login from './pages/login';
 import accountsPage from './pages/accounts';
 import ATMPage from './pages/atm';
 import currencyPage from './pages/currency';
@@ -44,7 +44,7 @@ export const routeSwitcher = () => {
       redirect('accounts');
       break;
     case '/login':
-      loginPage();
+      login();
       break;
     case '/accounts':
       if (urlParams.get('history') === 'true') {

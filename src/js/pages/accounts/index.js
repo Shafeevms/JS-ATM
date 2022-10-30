@@ -1,22 +1,15 @@
-import { headerButtonsEnable, renderComponent } from '../../helpers';
-import accountsPageComponent from './AccountsPageComponent.js';
-import accountSkeleton from './AccountSkeletonPage';
-import accountCardComponent from './AccountCardPage';
+import { component, module } from '../../core';
 import getAccounts from './api';
-import { userAccount } from '../../store';
+import accountsPage from './templates/accountsPage';
+import accountSkeleton from './templates/accountSkeletonPage';
+import controller from './controller';
 
 import './index.scss';
 
-const accountsPage = async () => {
-  headerButtonsEnable('accounts');
-  root.innerHTML = '';
-  renderComponent(root, accountSkeleton());
-  const { payload } = await getAccounts();
-  userAccount.data = payload;
-  root.innerHTML = '';
-  renderComponent(root, accountsPageComponent());
-  const ul = document.querySelector('.accounts__cardlist');
-  userAccount.data.forEach((card) => renderComponent(ul, accountCardComponent(card)));
-};
+const page = () => component({ template: accountsPage, controller });
 
-export default accountsPage;
+export default module({
+  component: page,
+  componentSkeleton: accountSkeleton,
+  getData: getAccounts,
+});
