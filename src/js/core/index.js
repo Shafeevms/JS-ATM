@@ -1,11 +1,13 @@
-// const root = document.querySelector('#root');
-
 export const module = ({
   component,
   componentSkeleton,
   getData,
   parent,
 }) => async (params) => {
+  if (params?.parent) {
+    parent = params.parent;
+  }
+
   if (!parent) {
     parent = document.querySelector('#root');
   }
@@ -25,6 +27,8 @@ export const module = ({
   }
   const html = component(data, params);
   parent.appendChild(html);
+
+  return html;
 };
 
 export const component = ({

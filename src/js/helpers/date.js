@@ -1,10 +1,7 @@
-import { headerButtonsComponent } from './components';
-
-export const renderComponent = (element, component) => {
-  element.appendChild(component);
+export const getMonth = (str) => {
+  const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+  return months[str.split('/')[1] - 1];
 };
-
-export const checkToken = () => sessionStorage.getItem('token');
 
 export const ISODateToText = (str) => {
   if (str) {
@@ -30,12 +27,4 @@ const traslateMonthRu = (num) => {
     'декабря',
   ];
   return months[num];
-};
-
-export const headerButtonsEnable = (getUrl) => {
-  const header = document.querySelector('.header__container');
-
-  if (header.lastElementChild !== document.querySelector('.header__wrapper')) {
-    renderComponent(header, headerButtonsComponent(getUrl));
-  }
 };

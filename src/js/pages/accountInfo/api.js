@@ -1,7 +1,7 @@
-import { request } from '../../api';
+import { request } from '../../core/api';
 import { userAccount } from '../../store';
 
-export const getAccountId = async (id) => {
+export const getAccountId = async ({ id }) => {
   const { payload } = await request({ URL: `account/${id}` });
   userAccount.data = payload;
 };

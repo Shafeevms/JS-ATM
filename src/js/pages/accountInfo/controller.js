@@ -1,4 +1,3 @@
-import { headerButtonsEnable } from '../../helpers';
 import { redirect } from '../../router';
 import { userAccount } from '../../store';
 import { transferAmmount } from './api';
@@ -11,7 +10,6 @@ import {
 } from './helpers';
 
 const controller = (html) => {
-  headerButtonsEnable('accounts');
   const { account } = userAccount.data;
   const inputAccount = html.querySelector('.an_form__select');
   const inputSumm = html.querySelector('.an_form__summ');
@@ -30,8 +28,7 @@ const controller = (html) => {
   chart.addEventListener('click', () => redirect(`accounts?id=${account}&history=true`));
 };
 
-
-//! продолжить от этой функции = разделить ее и заодно исправить сам список
+// TODO:продолжить от этой функции = разделить ее и заодно исправить сам список
 const inputAutoComplete = ((input, select) => {
   let arrayAccounts = [];
   let options = '';

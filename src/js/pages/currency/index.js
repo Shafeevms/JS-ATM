@@ -12,4 +12,5 @@ export default module({
   component: page,
   componentSkeleton: CurrencySkeletonPage,
   getData: getCurrencies,
+  parent: true,
 });

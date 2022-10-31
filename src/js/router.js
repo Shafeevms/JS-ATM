@@ -3,8 +3,9 @@ import login from './pages/login';
 import accountsPage from './pages/accounts';
 import ATMPage from './pages/atm';
 import currencyPage from './pages/currency';
-import { historyPage } from './pages/account_info/historyPage';
-import renderAccountInfo from './pages/account_info';
+import historyPage from './pages/accountHistory';
+import renderAccountInfo from './pages/accountInfo';
+import layout from './components/layout';
 
 export const redirect = (path) => window.history.pushState(null, '', path);
 
@@ -29,7 +30,7 @@ export const createURLChangeEvent = () => {
   });
 };
 
-export const routeSwitcher = () => {
+export const routeSwitcher = async() => {
   const { pathname, search } = window.location;
   const urlParams = new URLSearchParams(search);
   const id = urlParams.get('id');
@@ -39,31 +40,35 @@ export const routeSwitcher = () => {
   //   { path: '/accounts/:id', module: renderAccountInfo },
   // ];
 
-  switch (pathname) {
-    case '/':
-      redirect('accounts');
-      break;
-    case '/login':
-      login();
-      break;
-    case '/accounts':
-      if (urlParams.get('history') === 'true') {
-        historyPage(id);
+  if (pathname === '/login') {
+    login();
+  } else {
+    const layoutHtml = await layout();
+    const main = layoutHtml.querySelector('#main');
+
+    switch (pathname) {
+      case '/':
+        redirect('accounts');
         break;
-      }
-      if (id) {
-        renderAccountInfo(id);
+      case '/accounts':
+        if (urlParams.get('history') === 'true') {
+          historyPage({ id, parent: main });
+          break;
+        }
+        if (id) {
+          renderAccountInfo({ id, parent: main });
+          break;
+        }
+        accountsPage({ parent: main });
         break;
-      }
-      accountsPage();
-      break;
-    case '/atm':
-      ATMPage();
-      break;
-    case '/currency':
-      currencyPage();
-      break;
-    default:
-      break;
+      case '/atm':
+        ATMPage({ parent: main });
+        break;
+      case '/currency':
+        currencyPage({ parent: main });
+        break;
+      default:
+        break;
+    }
   }
 };

@@ -15,6 +15,7 @@ module.exports = {
     'func-style': 0,
     'no-return-assign': 'off',
     'no-use-before-define': 'off',
+    'import/prefer-default-export': 'off',
   },
   plugins: ['jest'],
 };

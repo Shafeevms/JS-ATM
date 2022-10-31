@@ -1,5 +1,6 @@
 import { module, component } from '../../core';
-import loginPage from './loginPage';
+
+import loginPage from './templates/loginPage';
 import controller from './controller';
 
 import './login.scss';

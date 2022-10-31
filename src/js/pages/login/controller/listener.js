@@ -1,8 +1,8 @@
-import fetchLogin from './api';
-import formDataToObject from './helpers';
-import { redirect } from '../../router';
-import login from '.';
-import { isLoginValid, addValidationClasses } from '../../validation';
+import fetchLogin from '../api';
+import { formDataToObject } from '../../../helpers/formData';
+import { redirect } from '../../../router';
+import login from '..';
+import { isLoginValid, addValidationClasses } from '../../../helpers/validation';
 
 const loginHandler = async (e) => {
   e.preventDefault();
@@ -17,11 +17,13 @@ const loginHandler = async (e) => {
 
 const loginResponse = (obj) => {
   const { payload, error } = obj;
+
   if (payload) {
     sessionStorage.setItem('token', payload.token);
     redirect('accounts');
-  } else login(error);
-  // } else throw new Error(error);
+  } else {
+    login(error);
+  }
 };
 
 export default loginHandler;

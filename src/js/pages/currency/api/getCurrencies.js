@@ -1,4 +1,4 @@
-import { request } from '../../../api';
+import { request } from '../../../core/api';
 
 const getAllCurrencies = async () => request({ URL: 'all-currencies' });
 const getClientCurrencies = async () => request({ URL: 'currencies' });

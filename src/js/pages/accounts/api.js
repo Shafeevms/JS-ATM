@@ -1,4 +1,4 @@
-import { request } from '../../api';
+import { request } from '../../core/api';
 import { userAccount } from '../../store';
 
 const getAccounts = async () => {

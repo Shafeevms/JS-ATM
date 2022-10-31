@@ -1,8 +1,8 @@
-import accountsPage from '.';
-import { createAccount } from '../../api';
-import { userAccount } from '../../store';
-import { module } from '../../core';
-import cardPage from '../../components/card';
+import accountsPage from '../index';
+import { createAccount } from '../../../core/api';
+import { userAccount } from '../../../store';
+import { module } from '../../../core';
+import cardPage from '../../../components/card';
 
 export const openAccountHandler = () => {
   createAccount();

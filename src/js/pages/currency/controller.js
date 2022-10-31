@@ -3,11 +3,7 @@ import currencyFeedSocket from './api/currencyFeedSocket';
 import realtimeLinesChunk from './templates/realtimeLines';
 import clientCurrencyChunk from './templates/clientCurrency';
 
-import { headerButtonsEnable } from '../../helpers';
-
 const controller = (html) => {
-  headerButtonsEnable('currency');
-
   const mistake = html.querySelector('.exchange__mistake');
   const currencyFrom = html.querySelector('.exchange__from');
   const currencyTo = html.querySelector('.exchange__to');

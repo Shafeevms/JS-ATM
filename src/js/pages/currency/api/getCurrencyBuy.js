@@ -1,4 +1,4 @@
-import { request } from '../../../api';
+import { request } from '../../../core/api';
 
 const currencyBuy = async (data) => request({ method: 'POST', URL: 'currency-buy', data });
 

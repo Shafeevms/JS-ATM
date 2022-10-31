@@ -1,4 +1,7 @@
-const transactionChunk = (obj, currentAccount) => {
+import { ISODateToText } from '../../../helpers/date';
+import { numberWithSpaces } from '../helpers';
+
+const transactionComponent = (obj, currentAccount) => {
   const {
     amount,
     date,
@@ -16,4 +19,12 @@ const transactionChunk = (obj, currentAccount) => {
   </ul>`;
 };
 
-export default transactionChunk;
+const transactionHistoryChunk = (array, currentAccount) => array
+  .slice(-10)
+  .sort((a, b) => a.date - b.date)
+  .reduceRight((acc, line) => {
+    acc += transactionComponent(line, currentAccount);
+    return `<li>${acc}</li>`;
+  }, '');
+
+export default transactionHistoryChunk;

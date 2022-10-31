@@ -1,4 +1,18 @@
-const historyPage = () => `
+import { userAccount } from '../../../store';
+import transactionHistoryChunk from '../../accountInfo/chunks/transactionHistoryChunk';
+import {
+  barRatioReducer,
+  barReducer,
+  getHistoryBalance,
+  maxRange,
+  monthReducer,
+  numberWithSpaces,
+} from '../../accountInfo/helpers';
+
+const historyPage = () => {
+  const { account, balance, transactions } = userAccount.data;
+  const preparedDatatoChart = getHistoryBalance(userAccount.data, 12);
+  return `
   <div class="details container">
     <header class="details__header">
       <h2 class="details__title">История баланса</h2>
@@ -49,11 +63,12 @@ const historyPage = () => `
             <li class="an-table__header-item">Дата</li>
           </ul>
           <ul class="an-table__body">
-            ${transactionHistoryReducer(transactions, account)}
+            ${transactionHistoryChunk(transactions, account)}
           </ul>
         </div>
       </div>
     </section>
   </div>`;
+};
 
 export default historyPage;

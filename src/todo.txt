@@ -14,3 +14,12 @@
 !!!
 question.txt Артему показать
 inputAutoComplete в src/js/pages/account_info/controller.js починить
+
+
+chunks убрать в темплейты
+
+сделать отдельный компонент инпут и в него засунуть ошибки и тд
+
+все чанки из хелперов убрать
+
+разобрать помойку helpers

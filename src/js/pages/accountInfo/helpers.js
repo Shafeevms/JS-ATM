@@ -1,3 +1,5 @@
+import { getMonth } from '../../helpers/date';
+
 const dayjs = require('dayjs');
 
 export function numberWithSpaces(x) {
@@ -81,9 +83,11 @@ const getAmountsPerMonths = (monthData, id, balance) => {
       tempArr.push(transaction.amount * sign);
     });
     tempArr.forEach((amount) => {
-      amount >= 0
-        ? pos += amount
-        : neg += amount;
+      if (amount >= 0) {
+        pos += amount;
+      } else {
+        neg += amount;
+      }
     });
     prevBalance = +(prevBalance - pos + -neg).toFixed(2);
     preparedMonthData[i] = {
@@ -101,11 +105,6 @@ const getAmountsPerMonths = (monthData, id, balance) => {
   return [{ balance, prevMonth: getMonth(dayjs().format('YY/MM')) }, ...preparedMonthData];
 };
 
-const getMonth = (str) => {
-  const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-  return months[str.split('/')[1] - 1];
-};
-
 export const monthReducer = (preparedData, cut = 0) => preparedData.reduceRight((acc, el, index) => {
   if (index !== preparedData.length - cut) {
     acc += `<li class="an_graphs__month">${el.prevMonth}</li>`;
@@ -121,7 +120,8 @@ const maxRatioRange = (preparedData) => {
   const temp = preparedData.map((el) => {
     if (el.pos || el.neg) {
       return el.pos - el.neg;
-    } else return 0;
+    }
+    return 0;
   });
   return (Math.max.apply(null, temp)).toFixed(2);
 };
@@ -129,7 +129,8 @@ const maxRatioRange = (preparedData) => {
 export const barReducer = (preparedData) => {
   const max = maxRange(preparedData);
   return preparedData.reduceRight((acc, el) => {
-    return acc += `<li class="an_graphs__bar" style="height: ${Math.floor(el.balance / max * 100)}%"></li>`;
+    acc += `<li class="an_graphs__bar" style="height: ${Math.floor((el.balance / max) * 100)}%"></li>`;
+    return acc;
   }, '');
 };
 
@@ -137,8 +138,8 @@ export const barRatioReducer = (preparedData) => {
   const max = maxRatioRange(preparedData);
   return preparedData.reduceRight((acc, el, index) => {
     if (index > 0) {
-      const height = +((el.pos - el.neg) / max * 100).toFixed(0) || 0;
-      const pos = +(el.pos / max * 100).toFixed(0) || 0;
+      const height = +(((el.pos - el.neg) / max) * 100).toFixed(0) || 0;
+      const pos = +((el.pos / max) * 100).toFixed(0) || 0;
       const neg = height - pos;
       acc += `<li class="an_ratio__empty-bar" style="height: ${height}%" data-month=${el.date}>
         <ul class="an_ratio__col">

@@ -1,6 +1,7 @@
 import './styles/header.scss';
 import { createURLChangeEvent, routeSwitcher, redirect } from './js/router';
-import { checkToken } from './js/helpers';
+
+export const checkToken = () => sessionStorage.getItem('token');
 
 setInterval(() => {
   const { pathname } = window.location;

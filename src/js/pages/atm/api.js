@@ -2,7 +2,7 @@
 /* eslint-disable quotes */
 /* eslint-disable arrow-body-style */
 
-import { request } from '../../api';
+import { request } from '../../core/api';
 
 const getBanks = async () => request({ URL: 'banks' });
 
