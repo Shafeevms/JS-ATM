@@ -2,7 +2,7 @@ import { component } from '../../core';
 import cardComponent from './template';
 import cardController from './controller';
 
-const cardPage = (_, params) => component({
+const cardPage = (params) => component({
   template: cardComponent,
   controller: cardController,
   data: params,

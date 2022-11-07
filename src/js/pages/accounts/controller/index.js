@@ -12,7 +12,7 @@ const accountsController = async (html) => {
   html.querySelector('.accounts__select').addEventListener('change', sortAccountsHandler);
   html.querySelector('.accounts__btn').addEventListener('click', openAccountHandler);
 
-  userAccount.data.forEach((card) => module({ component: cardPage, parent: ul })(card));
+  userAccount.data.forEach((card) => ul.append(cardPage(card)));
 };
 
 export default accountsController;

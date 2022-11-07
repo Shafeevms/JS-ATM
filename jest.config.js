@@ -33,12 +33,12 @@ module.exports = {
   ],
 
   coveragePathIgnorePatterns: [
-      '<rootDir>/node_modules/'
+      '<rootDir>/node_modules/',
   ],
 
   // An array of directory names to be searched recursively up from the requiring module's location
   moduleDirectories: [
-      'node_modules'
+      'node_modules',
   ],
 
   // An array of file extensions your modules use
@@ -48,17 +48,18 @@ module.exports = {
       'jsx',
       'ts',
       'tsx',
-      'node'
+      'node',
   ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-      // '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/jest/file-mock.js',
+      '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|scss|css)$': '<rootDir>/__mocks__/file-mock.js',
       '~(.*)$': '<rootDir>/$1',
   },
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-      '**/?(*.)+(spec|test).[tj]s?(x)'
+      '**/?(*.)+(spec|test).[tj]s?(x)',
   ],
+  testEnvironment: 'jsdom',
 };

@@ -1,13 +1,14 @@
 import { userAccount } from '../../../store';
+
 import {
   getHistoryBalance,
   numberWithSpaces,
-  barReducer,
   maxRange,
-  monthReducer,
 } from '../helpers';
 
-import transactionHistoryReducer from '../chunks/transactionHistoryChunk';
+import transactionHistoryReducer from './transactionHistoryChunk';
+import printMonths from './printMonths';
+import printBars from './printBars';
 
 const accountInfoPage = () => {
   const { account, balance, transactions } = userAccount.data;
@@ -27,30 +28,18 @@ const accountInfoPage = () => {
       </div>
     </header>
     <section class="details__analytics an">
-      <form class="an__form an_form">
-        <ul class="an_form__autocomlete"></ul>
-        <div class="an_form__misstake"></div>
-        <legend class="an_form__legend">Новый&nbsp;перевод</legend>
-        <label class="an_form__label an_form__label_select" for="transaction">Номер счета получателя</label>
-        <input class="an_form__select" name="transaction" autocomplete="off">
-        <label class="an_form__label an_form__label_input" for="number">Сумма перевода</label>
-        <input type="number" name="number" class="an_form__summ">
-        <button class="btn btn-fiiled an_form__btn">
-          <span class="btn-icon btn-icon_email">
-          </span>
-          <span class="btn-text js-btn">Отправить</span></button>
-      </form>
+
       <div class="an__graphs an_graphs">
         <h2 class="an_graphs__title">Динамика баланса</h2>
         <ul class="an_graphs__chart">
-          ${barReducer(preparedDatatoChart)}
+          ${printBars(preparedDatatoChart)}
         </ul>
         <div class="an_graphs__range">
         <span class="an_graphs__max">${maxRange(preparedDatatoChart).toFixed(0)}</span>
         <span class="an_graphs__max">0</span>
         </div>
         <ul class="an_graphs__months">
-          ${monthReducer(preparedDatatoChart)}
+          ${printMonths(preparedDatatoChart)}
         </ul>
       </div>
       <div class="an__history an_history">

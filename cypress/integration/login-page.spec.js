@@ -3,6 +3,7 @@
 describe('enter login and change directory to main page', () => {
   beforeEach(() => {
     window.sessionStorage.removeItem('token');
+    cy.wait(2000);
     cy.visit('http://localhost:8080/');
     cy.get('input[name=login]').as('login');
     cy.get('input[name=password]').as('password');

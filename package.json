@@ -26,6 +26,7 @@
     "html-webpack-partials-plugin": "^0.8.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^28.0.3",
+    "jest-environment-jsdom": "^29.2.2",
     "mini-css-extract-plugin": "^2.5.3",
     "prettier": "2.5.1",
     "sass": "^1.49.7",

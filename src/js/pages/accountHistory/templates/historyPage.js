@@ -1,13 +1,13 @@
 import { userAccount } from '../../../store';
-import transactionHistoryChunk from '../../accountInfo/chunks/transactionHistoryChunk';
+import transactionHistoryChunk from '../../accountInfo/templates/transactionHistoryChunk';
 import {
-  barRatioReducer,
-  barReducer,
   getHistoryBalance,
   maxRange,
-  monthReducer,
   numberWithSpaces,
 } from '../../accountInfo/helpers';
+import printBars from '../../accountInfo/templates/printBars';
+import printMonths from '../../accountInfo/templates/printMonths';
+import printBarRatio from './printBarRatio';
 
 const historyPage = () => {
   const { account, balance, transactions } = userAccount.data;
@@ -30,27 +30,27 @@ const historyPage = () => {
       <div class="an__graphs an_graphs an_graphs_fullpage">
         <h2 class="an_graphs__title">Динамика баланса</h2>
         <ul class="an_graphs__chart">
-          ${barReducer(preparedDatatoChart)}
+          ${printBars(preparedDatatoChart)}
         </ul>
         <div class="an_graphs__range">
         <span class="an_graphs__max">${maxRange(preparedDatatoChart).toFixed(0)}</span>
         <span class="an_graphs__max">0</span>
         </div>
         <ul class="an_graphs__months">
-          ${monthReducer(preparedDatatoChart)}
+          ${printMonths(preparedDatatoChart)}
         </ul>
       </div>
       <div class="an__ratio an_ratio an_ratio_fullpage">
         <h2 class="an_ratio__title">Соотношение входящих исходящих транзакций</h2>
         <ul class="an_ratio__chart">
-          ${barRatioReducer(preparedDatatoChart)}
+          ${printBarRatio(preparedDatatoChart)}
         </ul>
         <div class="an_ratio__range">
         <span class="an_ratio__max">${maxRange(preparedDatatoChart).toFixed(0)}</span>
         <span class="an_ratio__max">0</span>
         </div>
         <ul class="an_ratio__months">
-          ${monthReducer(preparedDatatoChart, 1)}
+          ${printMonths(preparedDatatoChart, 1)}
         </ul>
       </div>
       <div class="an__history an_history">

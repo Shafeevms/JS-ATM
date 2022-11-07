@@ -1,6 +1,6 @@
 import fetchLogin from '../api';
 import { formDataToObject } from '../../../helpers/formData';
-import { redirect } from '../../../router';
+
 import login from '..';
 import { isLoginValid, addValidationClasses } from '../../../helpers/validation';
 
@@ -16,13 +16,13 @@ const loginHandler = async (e) => {
 };
 
 const loginResponse = (obj) => {
-  const { payload, error } = obj;
+  const { payload } = obj;
 
   if (payload) {
     sessionStorage.setItem('token', payload.token);
-    redirect('accounts');
+    window.location.href = '/accounts';
   } else {
-    login(error);
+    login(obj);
   }
 };
 

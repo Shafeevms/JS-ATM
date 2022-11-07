@@ -1,10 +1,10 @@
-import { redirect } from '../../router';
+import { Router } from '../../core';
 
 const cardController = (html, data) => {
   const btn = html.querySelector('.card__btn');
   btn.addEventListener('click', (e) => {
     e.preventDefault();
-    redirect(`/accounts?id=${data.account}`);
+    Router.redirect(`/accounts/${data.account}`);
   });
 };
 

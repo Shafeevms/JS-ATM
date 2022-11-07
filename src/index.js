@@ -1,16 +1,14 @@
 import './styles/header.scss';
-import { createURLChangeEvent, routeSwitcher, redirect } from './js/router';
+import { Router } from './js/core';
+import { routesMap } from './js/router';
+import layoutComponent from './js/components/layout';
 
-export const checkToken = () => sessionStorage.getItem('token');
+Router.init();
 
-setInterval(() => {
-  const { pathname } = window.location;
+(async() => {
+  const layout = await layoutComponent();
+  const main = layout.querySelector('#main');
 
-  if (!checkToken() && pathname !== '/login') {
-    redirect('login');
-  }
-}, 1000);
+  Router.create(routesMap, main);
+})()
 
-createURLChangeEvent();
-window.addEventListener('locationchange', routeSwitcher);
-routeSwitcher();

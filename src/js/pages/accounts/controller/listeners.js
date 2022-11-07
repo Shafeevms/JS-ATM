@@ -1,7 +1,6 @@
 import accountsPage from '../index';
 import { createAccount } from '../../../core/api';
 import { userAccount } from '../../../store';
-import { module } from '../../../core';
 import cardPage from '../../../components/card';
 
 export const openAccountHandler = () => {
@@ -16,7 +15,7 @@ export const sortAccountsHandler = (e) => {
   list.innerHTML = '';
   data
     .sort((a, b) => compareFn(a, b, option))
-    .forEach((card) => module({ component: cardPage, parent: list })(card));
+    .forEach((card) => list.append(cardPage(card)));
 };
 
 const compareFn = (a, b, option) => {
