@@ -1,3 +1,7 @@
+const dayjs = require('dayjs');
+import 'dayjs/locale/ru';
+dayjs.locale('ru');
+
 import './styles/header.scss';
 import { Router } from './js/core';
 import { routesMap } from './js/router';

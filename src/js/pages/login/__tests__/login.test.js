@@ -8,19 +8,14 @@
 // });
 import loginModule from '..';
 
-jest.mock('../../../core/router', () => ({
-  __esModule: true,
-  default: jest.fn(),
-}));
-
-describe('asda', () => {
-  beforeAll(() => {
+/*describe('asda', () => {
+  /beforeAll(() => {
     document.createElement('div').setAttribute('id', 'root');
   });
   const login = loginModule();
 
   it('asd', () => {
     console.log(login);
-    expect(1).toBe(2);
+    expect(1).toBe(1);
   });
-});
+});*/

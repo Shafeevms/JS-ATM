@@ -12,6 +12,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "@babel/preset-env": "^7.17.10",
+    "@types/jest": "^29.2.2",
     "babel-jest": "^28.0.3",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.1",
@@ -28,6 +29,7 @@
     "jest": "^28.0.3",
     "jest-environment-jsdom": "^29.2.2",
     "mini-css-extract-plugin": "^2.5.3",
+    "mockdate": "^3.0.5",
     "prettier": "2.5.1",
     "sass": "^1.49.7",
     "sass-loader": "^12.4.0",

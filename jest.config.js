@@ -19,7 +19,7 @@ module.exports = {
   ],
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: '__tests__/coverage',
+  coverageDirectory: '<rootDir>/jest/coverage',
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'babel',
@@ -62,4 +62,8 @@ module.exports = {
       '**/?(*.)+(spec|test).[tj]s?(x)',
   ],
   testEnvironment: 'jsdom',
+
+  setupFilesAfterEnv: [
+    '<rootDir>/jest/jest.env.js',
+  ],
 };
