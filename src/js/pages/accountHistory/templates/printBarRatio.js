@@ -16,7 +16,7 @@ const printBarRatio = (preparedData) => {
   }, '');
 };
 
-const maxRatioRange = (preparedData) => {
+export const maxRatioRange = (preparedData) => {
   const temp = preparedData.map((el) => {
     if (el.pos || el.neg) {
       return el.pos - el.neg;

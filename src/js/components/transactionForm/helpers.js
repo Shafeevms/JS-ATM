@@ -26,7 +26,8 @@ export const saveAccountToLocalStorage = (account) => {
   const storage = localStorage.getItem('accounts');
   if (storage) {
     const array = JSON.parse(storage);
-    if (array.find((el) => el === account)) {
+    const founded = array.find((el) => el === account);
+    if (founded) {
       return;
     }
     localStorage.setItem('accounts', JSON.stringify([...array, account]));

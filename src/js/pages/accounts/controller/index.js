@@ -1,7 +1,6 @@
 import { openAccountHandler, sortAccountsHandler } from './listeners';
 import getAccounts from '../api';
 import { userAccount } from '../../../store';
-import { module } from '../../../core';
 import cardPage from '../../../components/card';
 
 const accountsController = async (html) => {

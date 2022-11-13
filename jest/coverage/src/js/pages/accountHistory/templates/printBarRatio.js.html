@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>8/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -92,61 +92,61 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const printBarRatio = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>reparedData) =&gt; {</span>
-  const max = <span class="cstat-no" title="statement not covered" >maxRatioRange(preparedData);</span>
-<span class="cstat-no" title="statement not covered" >  return preparedData.reduceRight(<span class="fstat-no" title="function not covered" >(a</span>cc, el, index) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (index &gt; 0) {</span>
-      const height = <span class="cstat-no" title="statement not covered" >+(((el.pos - el.neg) / max) * 100).toFixed(0) || 0;</span>
-      const pos = <span class="cstat-no" title="statement not covered" >+((el.pos / max) * 100).toFixed(0) || 0;</span>
-      const neg = <span class="cstat-no" title="statement not covered" >height - pos;</span>
-<span class="cstat-no" title="statement not covered" >      acc += `&lt;li class="an_ratio__empty-bar" style="height: ${height}%" data-month=${el.date}&gt;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const printBarRatio = (preparedData) =&gt; {
+  const max = maxRatioRange(preparedData);
+  return preparedData.reduceRight((acc, el, index) =&gt; {
+    if (index &gt; 0) {
+      const height = +(((el.pos - el.neg) / max) * 100).toFixed(0) || <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
+      const pos = +((el.pos / max) * 100).toFixed(0) || <span class="branch-1 cbranch-no" title="branch not covered" >0;</span>
+      const neg = height - pos;
+      acc += `&lt;li class="an_ratio__empty-bar" style="height: ${height}%" data-month=${el.date}&gt;
         &lt;ul class="an_ratio__col"&gt;
           &lt;li class="an_ratio__pos" style="height: ${pos}%"&gt;&lt;/li&gt;
           &lt;li class="an_ratio__neg" style="height: ${neg}%"&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;`;
     }
-<span class="cstat-no" title="statement not covered" >    return acc;</span>
+    return acc;
   }, '');
 };
 &nbsp;
-const maxRatioRange = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>reparedData) =&gt; {</span>
-  const temp = <span class="cstat-no" title="statement not covered" >preparedData.map(<span class="fstat-no" title="function not covered" >(e</span>l) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (el.pos || el.neg) {</span>
-<span class="cstat-no" title="statement not covered" >      return el.pos - el.neg;</span>
+export const maxRatioRange = (preparedData) =&gt; {
+  const temp = preparedData.map((el) =&gt; {
+    if (el.pos || el.neg) {
+      return el.pos - el.neg;
     }
-<span class="cstat-no" title="statement not covered" >    return 0;</span>
+    return 0;
   });
-<span class="cstat-no" title="statement not covered" >  return (Math.max.apply(null, temp)).toFixed(2);</span>
+  return (Math.max.apply(null, temp)).toFixed(2);
 };
 &nbsp;
 export default printBarRatio;
@@ -157,7 +157,7 @@ export default printBarRatio;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Nov 10 2022 00:23:20 GMT+0300 (Москва, стандартное время)
+                at Sun Nov 13 2022 22:05:51 GMT+0300 (Москва, стандартное время)
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

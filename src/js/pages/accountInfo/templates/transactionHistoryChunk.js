@@ -1,5 +1,6 @@
-import { ISODateToText } from '../../../helpers/date';
 import { numberWithSpaces } from '../helpers';
+
+const dayjs = require('dayjs');
 
 const transactionComponent = (obj, currentAccount) => {
   const {
@@ -15,7 +16,7 @@ const transactionComponent = (obj, currentAccount) => {
     <li class="an-table__body-item an-table__summ ${from !== currentAccount ? 'an-table__summ_positive' : 'an-table__summ_negative'}">
       ${numberWithSpaces(amount)}
     </li>
-    <li class="an-table__body-item">${ISODateToText(date)}</li>
+    <li class="an-table__body-item">${dayjs(date).format('D MMMM YYYY')}</li>
   </ul>`;
 };
 

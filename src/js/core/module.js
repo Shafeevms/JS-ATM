@@ -24,7 +24,6 @@ const module = ({
   }
 
   const data = typeof getData === 'function' ? await getData() : undefined;
-  console.log(parent);
   if (parent.tagName !== 'UL') {
     parent.innerHTML = '';
   }
