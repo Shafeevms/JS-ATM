@@ -7,3 +7,9 @@ Thumbs.db
 node_modules
 dist
 
+## e2e tests
+cypress/videos
+cypress/screenshots
+
+## jest
+jest/coverage
