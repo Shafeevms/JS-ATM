@@ -16,7 +16,7 @@ export const deleteError = (el) => {
 };
 
 export const filterStringInArray = (array, value) => (
-  array.filter((el) => el.slice(0, value.length) === value)
+  array.filter((el) => el.startsWith(value))
 );
 
 export const saveAccountToLocalStorage = (account) => {

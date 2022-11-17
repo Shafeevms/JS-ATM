@@ -8,13 +8,14 @@ describe('transactionform > helpers > filterStringInArray', () => {
     expect(result.length).toBe(2);
   });
 
-  it('returns 1 element', () => {
+  it('returns 0 elements', () => {
     const result = filterStringInArray(array, '33');
     expect(result.length).toBe(0);
   });
 
-  it('returns no element', () => {
+  it('returns 1 element', () => {
     const result = filterStringInArray(array, '3');
     expect(result.length).toBe(1);
+    expect(result).toEqual(['32']);
   });
 });
